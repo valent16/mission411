@@ -18,11 +18,8 @@ class PublicController{
                 $action=null;
             }
             switch($action){
-                case "":
-                    break;
-
                 default :
-                    require(Config::getVues()["default"]);
+                    require(Config::getViews()["home"]);
                     break;
             }
         }catch(Exception $e){

@@ -12,5 +12,5 @@ require_once ($rootDirectory.'/config/Autoload.php');
 //Ajouter gestion Exception
 Autoload::load();
 
-$cont = new ControleurFront();
+$cont = new FrontController();
 ?>

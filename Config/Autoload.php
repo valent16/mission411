@@ -28,10 +28,10 @@ class Autoload{
 	
 	private static function autoloadCallback($class){
 		global $rootDirectory;
-		
+
 		$sourceFileName = $class.'.php';
 		
-		$directoryList=array('','Config/', 'Modeles/', 'Controleur/', 'Metier/', 'Persistance/', 'vue/classes/');
+		$directoryList=array('','config/', 'model/', 'controller/', 'metier/', 'persistance/');
 		
 		foreach($directoryList as $subDir){
 			$filePath = $rootDirectory.$subDir.$sourceFileName;
