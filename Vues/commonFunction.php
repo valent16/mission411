@@ -4,10 +4,13 @@ function enTeteHTML($title, $charset, $css_sheet, $class_body){
 	echo "<!doctype html>\n";
 	echo "<html lang=\"fr\">\n";
 	echo "<head>\n";
-	echo "<meta charset=\"".$charset."\"/>\n";
-	echo "<link rel=\"stylesheet\" href=\"".$css_sheet."\" />\n";
-	echo "<title>".$title."</title>\n";
-	echo "</head>\n<body class=\"".$class_body."\">\n";
+	echo "<meta charset=\"$charset\"/>\n";
+	foreach($css_sheet as $k => $s){
+        echo "<link rel=\"stylesheet\" href=\"".$s."\" />\n";
+    }
+
+	echo "<title>$title</title>\n";
+	echo "</head>\n<body class=\"$class_body\">\n";
 }	
 
 function finFichierHTML(){
@@ -126,13 +129,8 @@ function EndStructureFichierHTML(){
 	echo "</div>\n";
 }
 
-function LoadJavaScript(){
-	echo "<script src=\"Assets/js/jquery.min.js\"></script>\n";
-	echo "<script src=\"Assets/js/jquery.dropotron.min.js\"></script>\n";
-	echo "<script src=\"Assets/js/skel.min.js\"></script>\n";
-	echo "<script src=\"Assets/js/skel-viewport.min.js\"></script>\n";
-	echo "<script src=\"Assets/js/util.js\"></script>\n";
-	echo "<!--[if lte IE 8]><script src=\"../Assets/js/ie/respond.min.js\"></script><![endif]-->\n";
-	echo "<script src=\"Assets/js/main.js\"></script>\n";
+function loadJavaScript(){
+    echo "<script type=\"text/javascript\" src=\"assets/JQuery/jquery.min.js\"></script>";
+    echo "<script type=\"text/javascript\" src=\"assets/bootstrap/js/bootstrap.min.js\"></script>";
 }
 ?>

@@ -7,8 +7,9 @@
  */
 $rootDirectory = dirname(__FILE__).'/';
 
-require_once ($rootDirectory.'/config/Autoload.php');
+require_once ($rootDirectory.'config/Autoload.php');
 
+//echo $rootDirectory.'/config/Autoload.php';
 //Ajouter gestion Exception
 Autoload::load();
 

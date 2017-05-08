@@ -17,11 +17,17 @@ class Config{
     }
 
     public static function getCSS(){
-        global $rootDirectory;
+        $cssDirectory = "http://".$_SERVER['HTTP_HOST']."/mission411.git/trunk/Assets/";
 
-        $cssDirectory = $rootDirectory."assets/";
+        return array("bootstrap" => $cssDirectory."bootstrap/css/bootstrap.css",
+                    "cssPerso" => $cssDirectory."cssPerso/design.css");
+    }
 
-        return array("bootstrap" => $cssDirectory."bootstrap/css/bootstrap.css");
+    public static function getScript(){
+        $scriptDirectory = "http://".$_SERVER['HTTP_HOST']."/mission411.git/trunk/Assets/";
+
+        return array("scriptBootstrap" => $scriptDirectory."bootstrap/js/bootstrap.min.js",
+                    "jQuery" => $scriptDirectory."JQuery/jquery.min.js");
     }
 
 

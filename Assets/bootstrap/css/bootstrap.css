@@ -10,6 +10,7 @@ html {
       -ms-text-size-adjust: 100%;
 }
 body {
+  padding-top: 70px;
   margin: 0;
 }
 article,
@@ -3816,6 +3817,7 @@ tbody.collapse.in {
 .input-group {
   position: relative;
   display: table;
+
   border-collapse: separate;
 }
 .input-group[class*="col-"] {

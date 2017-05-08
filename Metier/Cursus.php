@@ -9,6 +9,8 @@
 class Cursus{
     private $nom;
 
+    private $id;
+
     /**
      * @return mixed
      */
@@ -25,8 +27,13 @@ class Cursus{
         $this->nom = $nom;
     }
 
-    public function __construct($nom)
+    private function setID($id){
+        $this->id = $id;
+    }
+
+    public function __construct($nom, $id)
     {
         $this->setNom($nom);
+        $this->setID($id);
     }
 }
