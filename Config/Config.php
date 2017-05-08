@@ -23,6 +23,8 @@ class Config{
 
         return array("bootstrap" => $cssDirectory."bootstrap/css/bootstrap.css");
     }
+
+
 }
 
 ?>

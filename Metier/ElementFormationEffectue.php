@@ -16,10 +16,114 @@ class ElementFormationEffectue{
 
     private $semSeq;
 
+    private $credit;
+
     private $resultat;
 
-    public function __construct($elementFormation, $affectation, $semLabel, $semSeq, $resultat)
+    /**
+     * @return mixed
+     */
+    public function getElementFormation()
     {
-
+        return $this->elementFormation;
     }
+
+    /**
+     * @param mixed $elementFormation
+     */
+    public function setElementFormation($elementFormation)
+    {
+        $this->elementFormation = $elementFormation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAffectation()
+    {
+        return $this->affectation;
+    }
+
+    /**
+     * @param mixed $affectation
+     */
+    public function setAffectation($affectation)
+    {
+        $this->affectation = $affectation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSemLabel()
+    {
+        return $this->semLabel;
+    }
+
+    /**
+     * @param mixed $semLabel
+     */
+    public function setSemLabel($semLabel)
+    {
+        $this->semLabel = $semLabel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSemSeq()
+    {
+        return $this->semSeq;
+    }
+
+    /**
+     * @param mixed $semSeq
+     */
+    public function setSemSeq($semSeq)
+    {
+        $this->semSeq = $semSeq;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCredit()
+    {
+        return $this->credit;
+    }
+
+    /**
+     * @param mixed $credit
+     */
+    public function setCredit($credit)
+    {
+        $this->credit = $credit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResultat()
+    {
+        return $this->resultat;
+    }
+
+    /**
+     * @param mixed $resultat
+     */
+    public function setResultat($resultat)
+    {
+        $this->resultat = $resultat;
+    }
+
+    public function __construct($elementFormation, $affectation, $semLabel, $semSeq, $credit, $resultat)
+    {
+        $this->setElementFormation($elementFormation);
+        $this->setAffectation($affectation);
+        $this->setSemLabel($semLabel);
+        $this->setSemSeq($semSeq);
+        $this->setCredit($credit);
+        $this->setResultat($resultat);
+    }
+
 }
