@@ -11,6 +11,8 @@ class Cursus{
 
     private $id;
 
+    private $numEtu;
+
     /**
      * @return mixed
      */
@@ -31,9 +33,26 @@ class Cursus{
         $this->id = $id;
     }
 
-    public function __construct($nom, $id)
+    /**
+     * @return mixed
+     */
+    public function getNumEtu()
+    {
+        return $this->numEtu;
+    }
+
+    /**
+     * @param mixed $numEtu
+     */
+    public function setNumEtu($numEtu)
+    {
+        $this->numEtu = $numEtu;
+    }
+
+    public function __construct($nom, $id, $numEtu)
     {
         $this->setNom($nom);
         $this->setID($id);
+        $this->setNumEtu($numEtu);
     }
 }

@@ -16,12 +16,11 @@ class CursusGateway
             $dataError['persistance-get'] = "Impossible d'accéder aux données";
         }
 
-
         $collectionCursus = array();
 
         if ($stmt !==false){
             foreach($stmt as $row){
-                $cursus = new Cursus($row['nom_cursus'], $row['id_cursus']);
+                $cursus = new Cursus($row['nom_cursus'], $row['id_cursus'], $row['num_etu']);
                 $collectionCursus [] = $cursus;
             }
         }else{
@@ -30,4 +29,6 @@ class CursusGateway
         DataBaseManager::destroyQueryResults($stmt);
         return $collectionCursus;
     }
+
+
 }

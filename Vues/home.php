@@ -5,9 +5,20 @@
  * Date: 07/05/2017
  * Time: 12:38
  */
-    $cursus = array();
-    $cursus[] = new Cursus("cursus_antoine",1);
-    $cursus[] = new Cursus("cursus_valentin",2);
+    //$cursus = array();
+    //$cursus[] = new Cursus("cursus_antoine",1);
+    //$cursus[] = new Cursus("cursus_valentin",2);
+
+    $modelEtudiant = ModelMapEtudiant::getModelEtudiantAll();
+    $mapEtudiant = $modelEtudiant->getData();
+
+//    foreach ($mapEtudiant as $k => $v){
+//        echo "$k : ".$v->getNumCarteEtu()."</br>";
+//    }
+
+    $modelCursus = ModelCollectionCursus::getModelCursusAll();
+    $collectionCursus = $modelCursus->getData();
+
     require_once(Config::getViews()["commonFunction"]);
     enTeteHTML("UTT Cursus", "UTF-8", Config::getCSS(), "");
 ?>
@@ -70,21 +81,22 @@
                     </span>
 
                     <input id="searchBox" class="form-control" placeholder="nom cursus, nom etudiant" name="searchBox" type="text" onkeyup="affichageCursus()">
-                    <span class="input-group-addon">
-                        <button class="btn-inverse" type="submit">Rechercher</button>
-                    </span>
+<!--                    <span class="input-group-addon">-->
+<!--                        <button class="btn-inverse" type="submit">Rechercher</button>-->
+<!--                    </span>-->
                 </div>
             </div>
         </form>
 
 <!--        Affichage de la liste des cursus et des noms    -->
-        <div class="pre-scrollable" id="listeCursus">
-
-            <table>
+        <div class="pre-scrollable list-group" id="listeCursus">
+            <table class="table-striped table table-hover">
             <?php
-                foreach ($cursus as $c){
-                    echo "<tr>";
-                    echo "<td class=\"nomCursus\">".$c->getNom()."</td>";
+                foreach ($collectionCursus as $c){
+                    echo "<tr class=\"ligne-selectionnable nomCursus\"onclick=\"document.location='https://forum.alsacreations.com/topic-2-19797-1-Resolu-Mettre-un-lien-sur-une-ligne-dun-tableau.html'\">";
+                    echo "<td class=\"nom_cursus col-lg-6\">".$c->getNom()."</td>";
+                    echo "<td class=\"nom_etu col-lg-3\">".$mapEtudiant[$c->getNumEtu()]->getNom()."</td>";
+                    echo "<td class=\"prenom_etu col-lg-3\">".$mapEtudiant[$c->getNumEtu()]->getPrenom()."</td>";
                     echo "</tr>";
                 }
             ?>
@@ -98,10 +110,21 @@
     function affichageCursus(){
         var chaine = document.getElementById("searchBox").value;
         var elements = document.getElementsByClassName("nomCursus");
+        var noms_cursus = document.getElementsByClassName("nom_cursus");
+        var nom_etu = document.getElementsByClassName("nom_etu");
+        var prenom_etu = document.getElementsByClassName("prenom_etu");
+        
         if (chaine != ""){
-            var regex = new RegExp(".*"+chaine+".*");
+            tableauR = chaine.split(" ");
+            var tabRegex = new Array();
+
+            for (var i=0; i<tableauR.length;i++){
+                tabRegex.push(new RegExp(".*"+tableauR[i].toLowerCase()+".*"));
+            }
+
             for(var i=0; i<elements.length;i++){
-                if (!regex.test(elements[i].innerHTML)){
+                element_chaine = new Array(noms_cursus[i].innerHTML,nom_etu[i].innerHTML,prenom_etu[i].innerHTML);
+                if (!testChaine(tabRegex, element_chaine)){
                     elements[i].classList.add('hidden');
                 }else{
                     elements[i].classList.remove('hidden');
@@ -113,6 +136,23 @@
             }
         }
     }
+
+    function testChaine(tableauRegex, tableauElement){
+        for (var i=0; i<tableauRegex.length; i++){
+            var match = false;
+            for(var j=0; j<tableauElement.length; j++){
+                if (tableauRegex[i].test(tableauElement[j].toLowerCase())){
+                    match = true;
+                }
+            }
+            if (!match){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 </script>
 
 
