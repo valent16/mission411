@@ -8,7 +8,7 @@ function enTeteHTML($title, $charset, $css_sheet, $class_body){
 	foreach($css_sheet as $k => $s){
         echo "<link rel=\"stylesheet\" href=\"".$s."\" />\n";
     }
-
+    echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
 	echo "<title>$title</title>\n";
 	echo "</head>\n<body class=\"$class_body\">\n";
 }	

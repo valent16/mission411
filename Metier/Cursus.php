@@ -13,6 +13,8 @@ class Cursus{
 
     private $numEtu;
 
+    private $elementsFormationEffectues = [];
+
     /**
      * @return mixed
      */
@@ -49,7 +51,19 @@ class Cursus{
         $this->numEtu = $numEtu;
     }
 
-    public function __construct($nom, $id, $numEtu)
+    public function addElementFormationEffectues($elementFormationEffectue){
+        array_push($this->elementsFormationEffectues,$elementFormationEffectue);
+    }
+
+    /**
+     * @return array
+     */
+    public function getElementsFormationEffectues()
+    {
+        return $this->elementsFormationEffectues;
+    }
+
+    public function __construct($id,$nom, $numEtu)
     {
         $this->setNom($nom);
         $this->setID($id);

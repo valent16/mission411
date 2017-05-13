@@ -5,7 +5,7 @@
  * Date: 08/05/2017
  * Time: 13:53
  */
-require_once ('../Controller/ruleChecker.php');
+require_once('../Persistance/ObjectFiller.php');
 require_once ('../config/Config.php');
 require_once('commonFunction.php');
 enTeteHTML("Visualisation debug", "UTF-8", Config::getCSS(), "");
@@ -49,7 +49,7 @@ enTeteHTML("Visualisation debug", "UTF-8", Config::getCSS(), "");
             </br>
             </br>
             <p>
-                La liste ci-dessous présente le règlement : <?php echo $titreReglement; ?> appliqué au cursus de Debug.
+                La liste ci-dessous présente le règlement : <?php echo $titreReglement; ?> appliqué au cursus de <?php echo $etudiant->getPrenom().' '.$etudiant->getNom(); ?>.
                 </br>
                 </br>
             </p>
@@ -95,38 +95,28 @@ enTeteHTML("Visualisation debug", "UTF-8", Config::getCSS(), "");
         }
     }
 
-    echo "<table align='center' width='50%'>";
+
     foreach($regulation->getRules() as $rule){
     //Pour chacune des règles du règlement
-        echo "<tr>";
+
         switch ($rule->getRule()){
             case 'SUM' :
-                echo "<td>";
                     if($rule->getCategories()[0] == 'ALL') echo '<h4> Somme des toutes les matières effectuées </h4>';
                     else echo '<h4> Somme des '.printCategories($rule->getCategories()).' de '.$rule->getAffectation().' </h4>';
-                echo "</td>";
-                echo "<td>";
-                    echo '<div class="progress" style="width: 300%">';
+                    echo '<div class="progress" style="width: 30%">';
                         progressBar($rule->getScoreEffectif(),$rule->getScore());
                         echo $rule->getScoreEffectif()."/".$rule->getScore();
                         echo '</div>';
                     echo '</div>';
-                echo "</td>";
                 break;
             case 'EXIST' :
-                echo "<td>";
                     echo '<h4> Existance de '.printCategories($rule->getCategories()).' effectuée en '.$rule->getAffectation().' </h4>';
-                echo "</td>";
-                echo "<td>";
                     glyphIcon($rule->getScoreEffectif());
-                echo "</td>";
                 break;
             default : echo 'Règle inconnue';
                 break;
         }
-        echo "</tr>";
     }
-    echo "</table>";
 ?>
 
 

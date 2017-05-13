@@ -41,7 +41,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">Ajouter Cursus</a>
+                            <a href="Vues/ajoutCursus.php"> Ajouter Cursus</a>
                         </li>
                         <li>
                             <a href="#">Importer Règlement</a>

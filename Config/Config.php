@@ -13,7 +13,8 @@ class Config{
         $vueDirectory = $rootDirectory."Vues/";
 
         return array("home" => $vueDirectory."home.php",
-                    "commonFunction" => $vueDirectory."commonFunction.php");
+                    "commonFunction" => $vueDirectory."commonFunction.php",
+                    "ajoutCursus" => $vueDirectory."ajoutCursus.php");
     }
 
     public static function getCSS(){

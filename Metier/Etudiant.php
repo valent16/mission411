@@ -18,6 +18,7 @@ class Etudiant{
 
     private $filiere;
 
+    private $cursus = [];
     /**
      * @return mixed
      */
@@ -98,6 +99,9 @@ class Etudiant{
         $this->nom = $nom;
     }
 
+    public function addCursus($c){
+        array_push($this->cursus,$c);
+    }
 
     public function __construct($numCarteEtu, $nom, $prenom, $admission, $filiere)
     {
