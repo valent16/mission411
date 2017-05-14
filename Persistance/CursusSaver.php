@@ -40,7 +40,6 @@ class CursusSaver
             FROM element_formation
             WHERE sigle=?",[$data['sigle'][$i]]);
             $result = $elementQuery->fetch(PDO::FETCH_ASSOC);
-            echo "ELEMENT EXIST".$result['id'];
             if($result['id'] != null) return $result['id'];
             else return false;
         }
@@ -83,12 +82,12 @@ class CursusSaver
         if(isset($data)){
             if(!CursusSaver::isUserInDB($data)){
                 //Insertion d'un nouvel étudiant dans la bdd
-                echo "<p> Insertion étudiant <\p>";
+                //echo "<p> Insertion étudiant <\p>";
                 CursusSaver::insertUser($data);
             }
             if(!(CursusSaver::cursusExist($data))){
                 //Insertion d'un nouveau cursus
-                echo "<p> Insertion cursus <\p>";
+                //echo "<p> Insertion cursus <\p>";
                 CursusSaver::insertCursus($data);
             }
 

@@ -5,10 +5,13 @@
  * Date: 08/05/2017
  * Time: 13:53
  */
-require_once('../Persistance/ObjectFiller.php');
+require_once('../Persistance/RegulationFiller.php');
 require_once ('../config/Config.php');
 require_once('commonFunction.php');
 enTeteHTML("Visualisation debug", "UTF-8", Config::getCSS(), "");
+
+
+
 ?>
 
 <div>
@@ -48,11 +51,6 @@ enTeteHTML("Visualisation debug", "UTF-8", Config::getCSS(), "");
             <h1>Visualisation d'un cursus en fonction d'un règlement </h1>
             </br>
             </br>
-            <p>
-                La liste ci-dessous présente le règlement : <?php echo $titreReglement; ?> appliqué au cursus de <?php echo $etudiant->getPrenom().' '.$etudiant->getNom(); ?>.
-                </br>
-                </br>
-            </p>
         </div>
     </div>
 </div>
@@ -95,28 +93,43 @@ enTeteHTML("Visualisation debug", "UTF-8", Config::getCSS(), "");
         }
     }
 
+    $regulation = RegulationFiller::getRegulation($_GET['num_etu'],$_GET['num_cursus'],$_GET['reglement']);
 
+    echo "<div class='container'>";
+    echo "<div class='col-lg-8 col-lg-offset-2'>";
+    echo "<table width='100%' align='center'>";
     foreach($regulation->getRules() as $rule){
     //Pour chacune des règles du règlement
-
+        echo "<tr>";
         switch ($rule->getRule()){
             case 'SUM' :
-                    if($rule->getCategories()[0] == 'ALL') echo '<h4> Somme des toutes les matières effectuées </h4>';
-                    else echo '<h4> Somme des '.printCategories($rule->getCategories()).' de '.$rule->getAffectation().' </h4>';
-                    echo '<div class="progress" style="width: 30%">';
-                        progressBar($rule->getScoreEffectif(),$rule->getScore());
-                        echo $rule->getScoreEffectif()."/".$rule->getScore();
+                echo "<td width='50%'>";
+                        if($rule->getCategories()[0] == 'ALL') echo '<h4> Somme des toutes les matières effectuées </h4>';
+                        else echo '<h4> Somme des '.printCategories($rule->getCategories()).' de '.$rule->getAffectation().' </h4>';
+                echo "</td>";
+
+                echo "<td width='50%'>";
+                        echo '<div class="progress" style="width: 100%">';
+                            progressBar($rule->getScoreEffectif(),$rule->getScore());
+                            echo $rule->getScoreEffectif()."/".$rule->getScore();
+                            echo '</div>';
                         echo '</div>';
-                    echo '</div>';
+                echo "</td>";
                 break;
             case 'EXIST' :
+                echo "<td width='50%'>";
                     echo '<h4> Existance de '.printCategories($rule->getCategories()).' effectuée en '.$rule->getAffectation().' </h4>';
+                echo "</td>";
+                echo "<td width='50%'>";
                     glyphIcon($rule->getScoreEffectif());
+                echo "</td>";
                 break;
             default : echo 'Règle inconnue';
                 break;
         }
+        echo "</tr>";
     }
+    echo "</table>";
 ?>
 
 

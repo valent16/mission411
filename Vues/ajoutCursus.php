@@ -10,6 +10,36 @@ require_once ('../config/Config.php');
 require_once('commonFunction.php');
 enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
 ?>
+<div>
+    <nav class="navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="collapse navbar-collapse navbar-exinverse-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-home"></i>
+                        Accueil
+                    </a>
+                </li>
+                <li class="divider-vertical"></li>
+
+                <li class="dropdown">
+                    <a data-target="#" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Actions
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="Vues/ajoutCursus.php"> Ajouter Cursus</a>
+                        </li>
+                        <li>
+                            <a href="#">Importer Règlement</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
 
 <div class="container" xmlns="http://www.w3.org/1999/html">
     <div class="col-lg-8 col-lg-offset-2">
@@ -104,11 +134,10 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
                             <select class="form-control" id="categorie" name="categorie[]">
                                 <option value="CS">CS</option>
                                 <option value="TM">TM</option>
-                                <option value="EC">CT</option>
-                                <option value="HT">HT</option>
-                                <option value="ME">ME</option>
                                 <option value="ST">ST</option>
-                                <option value="SE">SE</option>
+                                <option value="EC">EC</option>
+                                <option value="ME">ME</option>
+                                <option value="CT">CT</option>
                                 <option value="HP">HP</option>
                                 <option value="NPML">NPML</option>
                             </select>
