@@ -5,7 +5,7 @@
  * Date: 13/05/2017
  * Time: 14:08
  */
-require_once('../Persistance/ObjectFiller.php');
+
 require_once ('../config/Config.php');
 require_once('commonFunction.php');
 enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
@@ -21,31 +21,31 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
     </div>
 </div>
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="RecapCursus.php">
     <div class="container">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="form-group">
                 <label class="control-label col-sm-3" for="num_etu">Numéro étudiant:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="num_etu" placeholder="Entrer numéro étudiant">
+                    <input type="text" class="form-control" id="num_etu" name="num_etu" placeholder="Entrer numéro étudiant"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="nom_etu">Nom:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nom_etu" placeholder="Entrer nom">
+                    <input type="text" class="form-control" id="nom_etu" name="nom_etu" placeholder="Entrer nom"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="prenom_etu">Prenom:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="prenom_etu" placeholder="Entrer prénom">
+                    <input type="text" class="form-control" id="prenom_etu" name="prenom_etu" placeholder="Entrer prénom"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="admission">Admission:</label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="admission">
+                    <select class="form-control" id="admission" name="admission">
                         <option value="tc">Tronc Commun</option>
                         <option value="br">Branche</option>
                     </select>
@@ -54,7 +54,7 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
             <div class="form-group">
                 <label class="control-label col-sm-3" for="filiere">Filière:</label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="filiere">
+                    <select class="form-control" id="filiere" name="filiere">
                         <option value="?">Pas encore en filière</option>
                         <option value="MPL">MPL</option>
                         <option value="MSi">MSI</option>
@@ -65,19 +65,19 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
             </div>
         </div>
     </div>
-<br></br>
+    <br></br>
 
     <div class="container">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="form-group">
                 <label class="control-label col-sm-3" for="nom_cursus">Nom Cursus:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nom_cursus" placeholder="Entrer nom cursus">
+                    <input type="text" class="form-control" id="nom_cursus" name="nom_cursus" placeholder="Entrer nom cursus"/>
                 </div>
             </div>
         </div>
     </div>
-<br></br>
+    <br></br>
 
     <div class="elements_formation">
         <div class="element">
@@ -86,19 +86,22 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="sigle">Sigle:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="sigle" placeholder="Entrer sigle">
+                            <input type="text" class="form-control" id="sigle" name="sigle[]" placeholder="Entrer sigle"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="utt">Validé à l'UTT</label>
-                        <div class="col-sm-1">
-                            <input id="utt" type="checkbox" class="form-control" value="utt" checked />
+                        <div class="col-sm-2">
+                            <select class="form-control" id="utt" name="utt[]">
+                                <option value="oui">Oui</option>
+                                <option value="non">Non</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="categorie">Catégorie</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="categorie">
+                            <select class="form-control" id="categorie" name="categorie[]">
                                 <option value="CS">CS</option>
                                 <option value="TM">TM</option>
                                 <option value="EC">CT</option>
@@ -114,7 +117,7 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="affectation">Affectation:</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="affectation">
+                            <select class="form-control" id="affectation" name="affectation[]">
                                 <option value="TC">Tronc Commun</option>
                                 <option value="TCBR">Tronc Commun de Branche</option>
                                 <option value="FCBR">Filière</option>
@@ -124,7 +127,7 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="sem_label">Libellé du semestre:</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="sem_label">
+                            <select class="form-control" id="sem_label" name="sem_label[]">
                                 <option value="TC">TC</option>
                                 <option value="ISI">ISI</option>
                                 <option value="SRT">SRT</option>
@@ -135,19 +138,19 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="sem_seq">Numéro de semestre:</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="sem_seq" placeholder="Entrer numéro semestre">
+                            <input type="number" class="form-control" id="sem_seq" name="sem_seq[]" placeholder="Entrer numéro semestre"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="credits">Nombre de crédits:</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="credits" placeholder="Entrer nombre crédits">
+                            <input type="number" class="form-control" id="credits" name="credits[]" placeholder="Entrer nombre crédits"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="resultat">Résultat:</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="resultat">
+                            <select class="form-control" id="resultat" name="resultat[]">
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                                 <option value="C">C</option>
@@ -172,6 +175,12 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
             <div class="add_field_button" align="center">
                 <button type="button" class="btn btn-success">Ajouter</button>
             </div>
+        </div>
+    </div>
+    <br></br>
+    <div class="container">
+        <div class="col-lg-8 col-lg-offset-2" align="center">
+                <button type="submit" class="btn btn-primary">Sauvegarder</button>
         </div>
     </div>
 </form>
