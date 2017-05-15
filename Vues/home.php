@@ -21,37 +21,9 @@
 
     require_once(Config::getViews()["commonFunction"]);
     enTeteHTML("UTT Cursus", "UTF-8", Config::getCSS(), "");
+    controlePublic();
 ?>
-<div>
-    <nav class="navbar-fixed-top navbar-inverse" role="navigation">
-        <div class="collapse navbar-collapse navbar-exinverse-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-home"></i>
-                        Accueil
-                    </a>
-                </li>
-                <li class="divider-vertical"></li>
 
-                <li class="dropdown">
-                    <a data-target="#" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Actions
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="Vues/ajoutCursus.php"> Ajouter Cursus</a>
-                        </li>
-                        <li>
-                            <a href="#">Importer Règlement</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
 
 
 <div class="container">
@@ -106,6 +78,7 @@
 </div>
 
 
+
 <script type="text/javascript">
     function affichageCursus(){
         var chaine = document.getElementById("searchBox").value;
@@ -113,7 +86,7 @@
         var noms_cursus = document.getElementsByClassName("nom_cursus");
         var nom_etu = document.getElementsByClassName("nom_etu");
         var prenom_etu = document.getElementsByClassName("prenom_etu");
-        
+
         if (chaine != ""){
             tableauR = chaine.split(" ");
             var tabRegex = new Array();
@@ -151,13 +124,13 @@
         }
         return true;
     }
-
-
 </script>
 
 
 
 <?php
+
+    loadFooter();
     loadJavaScript();
     finFichierHTML();
 ?>

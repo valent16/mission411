@@ -6,40 +6,12 @@
  * Time: 14:08
  */
 
-require_once ('../config/Config.php');
-require_once('commonFunction.php');
+//require_once ('../config/Config.php');
+//require_once('commonFunction.php');
+require_once(Config::getViews()["commonFunction"]);
 enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
+controlePublic();
 ?>
-<div>
-    <nav class="navbar-fixed-top navbar-inverse" role="navigation">
-        <div class="collapse navbar-collapse navbar-exinverse-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-home"></i>
-                        Accueil
-                    </a>
-                </li>
-                <li class="divider-vertical"></li>
-
-                <li class="dropdown">
-                    <a data-target="#" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Actions
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="Vues/ajoutCursus.php"> Ajouter Cursus</a>
-                        </li>
-                        <li>
-                            <a href="#">Importer Règlement</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
 
 <div class="container" xmlns="http://www.w3.org/1999/html">
     <div class="col-lg-8 col-lg-offset-2">
@@ -241,6 +213,7 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
 </script>
 
 <?php
+loadFooter();
 loadJavaScript();
 finFichierHTML();
 ?>

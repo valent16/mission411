@@ -51,78 +51,57 @@ function StructureFichierHTML(){
 	echo "</nav>\n";
 }
 
+//fonction permettant de générer la barre d'entêtes du document
+function controlePublic(){
+    echo '<div>
+            <nav class="navbar-fixed-top navbar-inverse" role="navigation">
+                <div class="collapse navbar-collapse navbar-exinverse-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="index.php?action=home">
+                                <i class="glyphicon glyphicon-home"></i>
+                                Accueil
+                            </a>
+                        </li>
+                        <li class="divider-vertical"></li>
 
-function ControleUser(){
-echo "<div class=\"login\">\n";
-	echo "<div class=\"heading\">\n";
-		echo "<h2 class=\"h2User\">Gestion du compte</h2>\n";
-		echo "<nav id=\"nav2\">\n";
-			echo "<ul>\n";
-			echo "<li class=\"current\"><a href=\"index.php?action=commentaireUser\">Commentaires</a></li>\n";
-			echo "</ul>\n";
-		echo "</nav>\n";
-		
-		echo "<nav id=\"nav2\">\n";
-			echo "<ul>\n";
-			echo "<li class=\"current\"><a href=\"index.php?action=actuUser\">Actualités</a></li>\n";
-			echo "</ul>\n";
-		echo "</nav>\n";
-		
-		echo "<nav id=\"nav2\">\n";
-			echo "<ul>\n";
-			echo "<li class=\"current\"><a href=\"index.php?action=afficheUser\">Mon Profil</a></li>\n";
-			echo "</ul>\n";
-		echo "</nav>\n";
-	echo "</div>\n";
-echo "</div>\n";
+                        <li class="dropdown">
+                            <a data-target="#" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Actions
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="index.php?action=ajoutCursus">Ajouter Cursus</a>
+                                </li>
+                                <li>
+                                    <a href="#">Importer Règlement</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>';
 }
 
+//fonction permettant de générer le footer du document
+function loadFooter(){
+    echo '<footer class="margin-top-20">
+            <nav class="navbar-fixed-bottom navbar-inverse">
+                <div class="row text-center text-muted">
+                    <p>Réalisé par CROISILLE Antoine et GILBERT Valentin. Utilise <a class="liens-footer" href="http://getbootstrap.com/">Bootstrap</a>.
+                    </p>
+                </div>
 
-function ControleAdmin(){
-echo "<div class=\"login\">\n";
-	echo "<div class=\"heading\">\n";
-		echo "<h2 class=\"h2User\">Gestion du site</h2>\n";
-		echo "<nav id=\"nav2\">\n";
-			echo "<ul>\n";
-			echo "<li class=\"current\"><a href=\"index.php?action=commentaireUser\">Commentaires</a></li>\n";
-			echo "</ul>\n";
-		echo "</nav>\n";
-		
-		echo "<nav id=\"nav2\">\n";
-			echo "<ul>\n";
-			echo "<li class=\"current\"><a href=\"index.php?action=actuUser\">Actualités</a></li>\n";
-			echo "</ul>\n";
-		echo "</nav>\n";
-		
-		echo "<nav id=\"nav2\">\n";
-			echo "<ul>\n";
-			echo "<li class=\"current\"><a href=\"index.php?action=personnageAdmin\">Personnages</a></li>\n";
-			echo "</ul>\n";
-		echo "</nav>\n";
-		
-		echo "<nav id=\"nav2\">\n";
-			echo "<ul>\n";
-			echo "<li class=\"current\"><a href=\"index.php?action=afficheUser\">Mon Profil</a></li>\n";
-			echo "</ul>\n";
-		echo "</nav>\n";
-		
-		echo "<nav id=\"nav2\">\n";
-			echo "<ul>\n";
-			echo "<li class=\"current\"><a href=\"index.php?action=afficheUser\">Utilisateurs</a></li>\n";
-			echo "</ul>\n";
-		echo "</nav>\n";
-	echo "</div>\n";
-echo "</div>\n";
+                <div class="row text-center text-muted">
+                    <p>© 2017<a class="liens-footer" href="https://fr.linkedin.com/in/antoine-croisille-4781b213a"> A. Croisille</a> <a class="liens-footer" href="https://fr.linkedin.com/in/valentin-gilbert-147683139">V.Gilbert</a>, All rights reserved 2017.</p>
+                </div>
+             </nav>
+           </footer>';
 }
 
-function ConnectedUser(){
-	
-}
-
-function ConnectedAdmin(){
-
-}
-
+//Fonction permettant de générer la structure de fin du fichier html
 function EndStructureFichierHTML(){
 	echo "</div>\n";
 	echo "</div>\n";

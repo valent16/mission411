@@ -18,6 +18,15 @@ class PublicController{
                 $action=null;
             }
             switch($action){
+
+                case "ajoutCursus":
+                    require(Config::getViews()["ajoutCursus"]);
+                    break;
+
+                case "home":
+                    require(Config::getViews()["home"]);
+                    break;
+
                 default :
                     require(Config::getViews()["home"]);
                     break;
