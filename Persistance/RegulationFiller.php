@@ -6,13 +6,13 @@
  * Date: 14/05/2017
  * Time: 17:43
  */
-require_once ('dataBaseManager.php');
-require_once ('../Controller/RuleChecker.php');
-require_once ('../Metier/Etudiant.php');
-require_once ('../Metier/Cursus.php');
-require_once ('../Metier/ElementFormationEffectue.php');
-require_once ('../Metier/ElementFormation.php');
-require_once ('../Metier/Regulation.php');
+//require_once ('dataBaseManager.php');
+//require_once ('../Controller/RuleChecker.php');
+//require_once ('../Metier/Etudiant.php');
+//require_once ('../Metier/Cursus.php');
+//require_once ('../Metier/ElementFormationEffectue.php');
+//require_once ('../Metier/ElementFormation.php');
+//require_once ('../Metier/Regulation.php');
 
 class RegulationFiller
 {

@@ -65,7 +65,8 @@
             <table class="table-striped table table-hover">
             <?php
                 foreach ($collectionCursus as $c){
-                    echo "<tr class=\"ligne-selectionnable nomCursus\"onclick=\"document.location='https://forum.alsacreations.com/topic-2-19797-1-Resolu-Mettre-un-lien-sur-une-ligne-dun-tableau.html'\">";
+                    $loc = "index.php?action=detailCursus&id=".$c->getId();
+                    echo "<tr class=\"ligne-selectionnable nomCursus\"onclick=\"document.location='".$loc."'\">";
                     echo "<td class=\"nom_cursus col-lg-6\">".$c->getNom()."</td>";
                     echo "<td class=\"nom_etu col-lg-3\">".$mapEtudiant[$c->getNumEtu()]->getNom()."</td>";
                     echo "<td class=\"prenom_etu col-lg-3\">".$mapEtudiant[$c->getNumEtu()]->getPrenom()."</td>";
@@ -129,7 +130,6 @@
 
 
 <?php
-
     loadFooter();
     loadJavaScript();
     finFichierHTML();

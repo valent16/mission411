@@ -22,7 +22,7 @@ class EtudiantGateway{
 
         if ($stmt !== false){
             foreach($stmt as $row){
-                $etudiant = new Etudiant($row['numCarteEtu'], $row['nom'], $row['prenom'], $row['admission'], $row['filiere']);
+                $etudiant = new Etudiant($row['num_carte_etu'], $row['nom'], $row['prenom'], $row['admission'], $row['filiere']);
                 $collectionEtudiant[$etudiant->getNumCarteEtu()] = $etudiant;
 
             }
@@ -30,6 +30,33 @@ class EtudiantGateway{
             $dataError['persistance-get'] = "Aucun cursus trouvé.";
         }
         return $collectionEtudiant;
+    }
+
+
+    public static function getEtudiantByNumEtu($numEtu){
+        if (isset($numEtu)) {
+            try {
+                $stmt = DataBaseManager::getInstance()->prepareAndExecuteQuery('SELECT * FROM Etudiant WHERE num_carte_etu=?', array($numEtu));
+            } catch (Exception $e) {
+                $dataError['persistance-get'] = "Impossible d'accéder aux données";
+            }
+
+            if ($stmt !== false) {
+                $count = 0;
+                foreach ($stmt as $row) {
+                    $etudiant = new Etudiant($row['num_carte_etu'], $row['nom'], $row['prenom'], $row['admission'], $row['filiere']);
+                    $count++;
+                }
+                if ($count != 1) {
+                    $dataError['persistance-get'] = "Cursus Introuvable";
+                }
+                return $etudiant;
+            } else {
+                $dataError['persistance-get'] = "Cursus Introuvable";
+            }
+        }else{
+            $dataError['persistance-get'] = "Crusus Introuvable";
+        }
     }
 }
 

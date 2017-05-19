@@ -14,7 +14,9 @@ class Config{
 
         return array("home" => $vueDirectory."home.php",
                     "commonFunction" => $vueDirectory."commonFunction.php",
-                    "ajoutCursus" => $vueDirectory."ajoutCursus.php");
+                    "ajoutCursus" => $vueDirectory."ajoutCursus.php",
+                    "applicationReglementCursus" => $vueDirectory."applicationReglementCursus.php",
+                    "detailCursus" => $vueDirectory."detailCursus.php");
     }
 
     public static function getCSS(){
@@ -30,8 +32,6 @@ class Config{
         return array("scriptBootstrap" => $scriptDirectory."bootstrap/js/bootstrap.min.js",
                     "jQuery" => $scriptDirectory."JQuery/jquery.min.js");
     }
-
-
 }
 
 ?>

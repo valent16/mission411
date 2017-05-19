@@ -23,7 +23,7 @@ controlePublic();
     </div>
 </div>
 
-<form class="form-horizontal" method="post" action="RecapCursus.php">
+<form class="form-horizontal" method="post" action="detailCursus.php">
     <div class="container">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="form-group">

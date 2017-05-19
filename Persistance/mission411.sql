@@ -71,7 +71,7 @@ CREATE TABLE `element_formation_effectue` (
 --
 
 CREATE TABLE `etudiant` (
-  `numCarteEtu` int(11) NOT NULL,
+  `num_carte_etu` int(11) NOT NULL,
   `nom` varchar(50) COLLATE utf8_bin NOT NULL,
   `prenom` varchar(50) COLLATE utf8_bin NOT NULL,
   `admission` varchar(2) COLLATE utf8_bin NOT NULL,
@@ -107,7 +107,7 @@ ALTER TABLE `element_formation_effectue`
 -- Index pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  ADD PRIMARY KEY (`numCarteEtu`);
+  ADD PRIMARY KEY (`num_carte_etu`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -131,7 +131,7 @@ ALTER TABLE `element_formation`
 -- Contraintes pour la table `cursus`
 --
 ALTER TABLE `cursus`
-  ADD CONSTRAINT `fk_numetudiant` FOREIGN KEY (`num_etu`) REFERENCES `etudiant` (`numCarteEtu`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_numetudiant` FOREIGN KEY (`num_etu`) REFERENCES `etudiant` (`num_carte_etu`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `element_formation_effectue`

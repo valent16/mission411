@@ -31,8 +31,12 @@ class Cursus{
         $this->nom = $nom;
     }
 
-    private function setID($id){
+    private function setId($id){
         $this->id = $id;
+    }
+
+    public function getId(){
+        return $this->id;
     }
 
     /**
@@ -66,7 +70,7 @@ class Cursus{
     public function __construct($id,$nom, $numEtu)
     {
         $this->setNom($nom);
-        $this->setID($id);
+        $this->setId($id);
         $this->setNumEtu($numEtu);
     }
 }

@@ -27,6 +27,14 @@ class PublicController{
                     require(Config::getViews()["home"]);
                     break;
 
+                case "detailCursus":
+                    require(Config::getViews()["detailCursus"]);
+                    break;
+
+                case "visualisationCursus":
+                    require(Config::getViews()["visualisationCursus"]);
+                    break;
+
                 default :
                     require(Config::getViews()["home"]);
                     break;
