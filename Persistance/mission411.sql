@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `mission411`
 --
-
 -- --------------------------------------------------------
 
 --
@@ -143,3 +142,27 @@ ALTER TABLE `element_formation_effectue`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+INSERT INTO `etudiant` (`num_carte_etu`, `nom`, `prenom`, `admission`, `filiere`) VALUES
+(39685, 'Laporte', 'Antoine', 'TC', 'MPL'),
+(40365, 'Gilbert', 'Valentin', 'TC', '?'),
+(40826, 'Croisille', 'Antoine', 'BR', '?');
+
+INSERT INTO `cursus` (`id_cursus`, `nom_cursus`, `num_etu`) VALUES
+(1, 'cursus_antoine', 40826),
+(2, 'cursus_valentin', 40365),
+(3, 'cursus_laporte', 39685);
+
+INSERT INTO `element_formation` (`id`, `sigle`, `utt`, `categorie`) VALUES
+(1, 'NF16', 1, 'CS'),
+(2, 'LO12', 1, 'CS'),
+(3, 'IF03', 1, 'TM'),
+(4, 'LO07', 1, 'TM');
+
+INSERT INTO `element_formation_effectue` (`id_cursus`, `id_element_formation`, `affectation`, `sem_label`, `sem_seq`, `credit`, `resultat`) VALUES
+(3, 1, 'TCBR', 'ISI1', 1, 6, 'C'),
+(3, 2, 'TCBR', 'ISI1', 1, 6, 'B'),
+(3, 3, 'TCBR', 'ISI2', 2, 6, 'B');
+
+
+

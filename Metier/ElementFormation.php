@@ -80,11 +80,12 @@ class ElementFormation{
     }
 
 
-    public function __construct($idElementFormation,$sigle, $utt, $categorie)
+    public function __construct($idElementFormation, $sigle, $utt, $categorie)
     {
         $this->setIdElementFormation($idElementFormation);
         $this->setCategorie($categorie);
         $this->setUtt($utt);
         $this->setCategorie($categorie);
+        $this->setSigle($sigle);
     }
 }

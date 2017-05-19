@@ -13,8 +13,11 @@ enTeteHTML("Récapitulation cursus", "UTF-8", Config::getCSS(), "");
 controlePublic();
 
 $numCursus = $_GET["id"];
+$modelCollectionElementFormation = ModelCollectionElementFormation::getModelElementsFormationByIdCursus($numCursus);
+$collectionElementFormation = $modelCollectionElementFormation->getData();
 $modelCursus = ModelCursus::getCrususById($numCursus);
 $cursus = $modelCursus->getData();
+$cursus->affectationElementsFormation($collectionElementFormation);
 $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
 ?>
 <div class="container">
@@ -70,102 +73,85 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
             </div>
         </div>
 
+
+
         <div class="row text-center">
             <h1>Récapitulatif du cursus</h1>
 
-            <button type="button" class="btn btn-primary btn-block" id="Semestre-1">
-                Semestre 1
-<!--                <span class="pull-right">-->
-<!--                <span class="glyphicon glyphicon-trash "></span>-->
-<!--                </span>-->
-            </button>
+            <?php
+                //génération de la liste de cursus
+                $elementsFormationsTC = $cursus->getMapSortTC();
+                $elementsFormationsBranche = $cursus->getMapSortBranche();
+                echo "<h1>Elements de formation suivis en TC</h1>";
+                afficherElementsFormation($elementsFormationsTC, true);
+                echo "<h1>Elements de formation suivis en Branche</h1>";
+                afficherElementsFormation($elementsFormationsBranche, false);
 
-            <a class="btn btn-primary btn-block" id="lien-a" >bonjur</a>
-        </div>
 
-        <div class="row" id="div-Semestre-1">
-            <p>
-                Coucou les amis
-            </p>
+                function afficherElementsFormation($elementsFormations, $isTC){
+                    if ($isTC){
+                        $cycle="TC";
+                    }else {
+                        $cycle = "Branche";
+                    }
 
+                    if (count($elementsFormations) == 0){
+                        echo "Aucun élément de formation pour le cycle ".$cycle;
+                    }
+
+                    foreach($elementsFormations as $k=>$elementsFormations){
+                        echo '
+                    <a class="btn btn-primary btn-block margin-bottom-20 " id="Semestre-'.$k.'-'.$cycle.'" >Semestre '.$k.'</a>';
+
+                        echo '<div class="text-left" id="div-Semestre-'.$k.'-'.$cycle.'">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <ul class="list-group">';
+                        foreach($elementsFormations as $e){
+                            echo '<li class="list-group-item">
+                                <span>'.$e->getElementFormation()->getSigle().'</span>
+                                <div class="pull-right action-buttons">
+                                    <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                                 </div>
+                              </li>';
+                        }
+                        echo '        </ul>
+                                </div>
+                            </div>
+                        </div>';
+                    }
+                }
+
+            ?>
         </div>
     </div>
 </div>
 
 
-    <button id="affiche">Faire apparaître les lignes paires</button>
-
-    <button id="cache">Faire disparaître les lignes paires</button><br />
-
-    <table border>
-
-        <tr><td>a</td><td>b</td><td>c</td></tr>
-
-        <tr><td>d</td><td>e</td><td>f</td></tr>
-
-        <tr><td>g</td><td>h</td><td>i</td></tr>
-
-        <tr><td>j</td><td>k</td><td>l</td></tr>
-
-        <tr><td>m</td><td>n</td><td>o</td></tr>
-
-    </table>
-
-
-
-
-    <script src="jquery.js"></script>
-
     <script>
         $( document ).ready(function() {
             $('#div-Semestre-1').hide();
+            $('div').filter(function() {
+                    return this.id.match(/Semestre.*/);
+                }).hide();
         });
 
 
         $(function() {
-            $('tr:even').css('background','yellow');
-            $('td').css('width','200px');
-            $('td').css('text-align','center');
-
-            $('#affiche').click(function() {
-                $('tr:even').show('slow');
-            } );
-
-            $('#cache').click(function() {
-                $('tr:even').hide(1000);
-            });
-
-            $('button').click(function(){
-                //alert($(this).attr("id"));
-
-                if ( $('#div-'+$(this).attr("id")+'').is(":visible")){
-                    $('#div-'+$(this).attr("id")+'').hide(1000);
-                }else{
-                    $('#div-'+$(this).attr("id")+'').show('slow');
-                }
-
-                //console.log('div-'+$(this).attr("id")+'');
-
-            })
-
-
-
             $('a').click(function(){
-                //alert($(this).attr("id"));
+                var valeur;
+                if (valeur = $(this).attr("id").match(/^Semestre-[0-9]*-[A-Za-z]*$/)){
+                    if ( $('#div-'+valeur).is(":visible")){
+                        $('#'+valeur).removeClass("active");
+                        $('#div-'+valeur).hide(1000);
+                    }else{
+                        $('#'+valeur).addClass("active");
+                        $('#div-'+valeur).show('slow');
+                    }
 
-                if ( $('#div-Semestre-1').is(":visible")){
-                    $('#lien-a').removeClass("active");
-                    $('#div-Semestre-1').hide(1000);
-                }else{
-                    $('#lien-a').addClass("active");
-                    $('#div-Semestre-1').show('slow');
                 }
-                //console.log('div-'+$(this).attr("id")+'');
-
-            })
-
+            });
         });
-
     </script>
 
 <?php
