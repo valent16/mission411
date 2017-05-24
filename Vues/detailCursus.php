@@ -12,13 +12,20 @@ enTeteHTML("Récapitulation cursus", "UTF-8", Config::getCSS(), "");
 //CursusSaver::save($_POST);
 controlePublic();
 
-$numCursus = $_GET["id"];
+$numCursus = null;
+if(isset($_GET["id"])){
+    $numCursus = $_GET["id"];
+}
+elseif (isset($_POST)){
+    $numCursus = CursusSaver::save($_POST);
+}
 $modelCollectionElementFormation = ModelCollectionElementFormation::getModelElementsFormationByIdCursus($numCursus);
 $collectionElementFormation = $modelCollectionElementFormation->getData();
 $modelCursus = ModelCursus::getCrususById($numCursus);
 $cursus = $modelCursus->getData();
 $cursus->affectationElementsFormation($collectionElementFormation);
 $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
+
 ?>
 <div class="container">
     <div class="col-lg-8 col-lg-offset-2">
@@ -51,7 +58,8 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                     Sélectionnez un règlement dans la liste déroulante ci dessous puis cliquez sur visualiser
                 </p>
 
-                <form class="form-horizontal" method="get" action="applicationReglementCursus.php" target="_blank">
+                <form class="form-horizontal" method="get" action="index.php" target="_blank">
+                    <input type="hidden" name="action" value="applicationReglementCursus" />
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="reglement">Règlement:</label>
                         <div class="col-sm-8">
@@ -62,7 +70,7 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
 
                         <?php
                         echo "<input type='hidden' name='num_etu' value='".$modelEtudiant->getData()->getNumCarteEtu()."'/>";
-                        echo "<input type='hidden' name='num_cursus' value='".CursusSaver::cursusExist($_POST)."'/>";
+                        echo "<input type='hidden' name='num_cursus' value='".$numCursus."'/>";
                         ?>
                         <br></br>
                         <div align="center">
@@ -123,6 +131,13 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                 }
 
             ?>
+            <form class="form-horizontal" method="get" action="index.php">
+                <input type="hidden" name="action" value="ajoutCursus"/>
+                <?php echo "<input type='hidden' name='num_cursus' value='".$numCursus."'/>"; ?>
+                <div class="col-lg-8 col-lg-offset-2" align="center">
+                    <button type="submit" class="btn btn-primary">Modifier Cursus</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

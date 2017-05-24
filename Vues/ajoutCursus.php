@@ -11,6 +11,19 @@
 require_once(Config::getViews()["commonFunction"]);
 enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
 controlePublic();
+
+$modelEtudiant = null;
+$cursus = null;
+if(isset($_GET['num_cursus'])){
+    $numCursus = $_GET['num_cursus'];
+    $modelCollectionElementFormation = ModelCollectionElementFormation::getModelElementsFormationByIdCursus($numCursus);
+    $collectionElementFormation = $modelCollectionElementFormation->getData();
+    $modelCursus = ModelCursus::getCrususById($numCursus);
+    $cursus = $modelCursus->getData();
+    $cursus->affectationElementsFormation($collectionElementFormation);
+    $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
+}
+
 ?>
 
 <div class="container" xmlns="http://www.w3.org/1999/html">
@@ -23,46 +36,40 @@ controlePublic();
     </div>
 </div>
 
-<form class="form-horizontal" method="post" action="detailCursus.php">
+<form class="form-horizontal" method="post" action="index.php">
+    <input type="hidden" name="action" value="detailCursus" />
     <div class="container">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="form-group">
                 <label class="control-label col-sm-3" for="num_etu">Numéro étudiant:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="num_etu" name="num_etu" placeholder="Entrer numéro étudiant"/>
+                    <?php
+                        echo input("text","form-control","num_etu","num_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getNumCarteEtu()),"Entrer numéro étudiant");
+                    ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="nom_etu">Nom:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nom_etu" name="nom_etu" placeholder="Entrer nom"/>
+                    <?php echo input("text","form-control","nom_etu","nom_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getNom()),"Entrer nom étudiant"); ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="prenom_etu">Prenom:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="prenom_etu" name="prenom_etu" placeholder="Entrer prénom"/>
+                    <?php echo input("text","form-control","prenom_etu","prenom_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getPrenom()),"Entrer prénom étudiant"); ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="admission">Admission:</label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="admission" name="admission">
-                        <option value="tc">Tronc Commun</option>
-                        <option value="br">Branche</option>
-                    </select>
+                    <?php echo select("form-control","admission","admission",["Tronc Commun" => "TC", "Branche" => "BR"],($modelEtudiant==null ? "" : $modelEtudiant->getData()->getAdmission())); ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="filiere">Filière:</label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="filiere" name="filiere">
-                        <option value="?">Pas encore en filière</option>
-                        <option value="MPL">MPL</option>
-                        <option value="MSi">MSI</option>
-                        <option value="MRI">MRI</option>
-                        <option value="LIB">LIB</option>
-                    </select>
+                    <?php echo select("form-control","filiere","filiere",["?" => "?", "MPL" => "MPL","MSI" => "MSI","MRI" => "MRI", "LIB" => "LIB"],($modelEtudiant==null ? "" : $modelEtudiant->getData()->getFiliere())); ?>
                 </div>
             </div>
         </div>
@@ -74,102 +81,89 @@ controlePublic();
             <div class="form-group">
                 <label class="control-label col-sm-3" for="nom_cursus">Nom Cursus:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nom_cursus" name="nom_cursus" placeholder="Entrer nom cursus"/>
+                    <?php echo input("text","form-control","nom_cursus","nom_cursus",($cursus==null ? "" : $cursus->getNom()),"Entrer nom cursus"); ?>
                 </div>
             </div>
         </div>
     </div>
     <br></br>
 
+
     <div class="elements_formation">
-        <div class="element">
-            <div class="container">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="sigle">Sigle:</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="sigle" name="sigle[]" placeholder="Entrer sigle"/>
+        <?php
+        $max = 0;
+        if($cursus == null){
+            $max = 1;
+        }
+        else{
+            $max = count($cursus->getElementsFormationEffectues());
+        }
+        for($i = 0; $i<$max; $i++) {
+        ?>
+            <div class="element">
+                <div class="container">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="sigle">Sigle:</label>
+                            <div class="col-sm-9">
+                                <?php echo input("text", "form-control", "sigle", "sigle[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getSigle()), "Entrer sigle"); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="utt">Validé à l'UTT</label>
-                        <div class="col-sm-2">
-                            <select class="form-control" id="utt" name="utt[]">
-                                <option value="oui">Oui</option>
-                                <option value="non">Non</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="utt">Validé à l'UTT</label>
+                            <div class="col-sm-2">
+                                <?php echo select("form-control", "utt", "utt", ["Oui" => "oui", "Non" => "non"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getUtt())); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="categorie">Catégorie</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="categorie" name="categorie[]">
-                                <option value="CS">CS</option>
-                                <option value="TM">TM</option>
-                                <option value="ST">ST</option>
-                                <option value="EC">EC</option>
-                                <option value="ME">ME</option>
-                                <option value="CT">CT</option>
-                                <option value="HP">HP</option>
-                                <option value="NPML">NPML</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="categorie">Catégorie</label>
+                            <div class="col-sm-9">
+                                <?php echo select("form-control", "categorie", "categorie[]", ["CS" => "CS", "TM" => "TM", "ST" => "ST", "EC" => "EC"
+                                    , "ME" => "ME", "CT" => "CT", "HP" => "HP", "NPML" => "NPML"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getCategorie())); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="affectation">Affectation:</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="affectation" name="affectation[]">
-                                <option value="TC">Tronc Commun</option>
-                                <option value="TCBR">Tronc Commun de Branche</option>
-                                <option value="FCBR">Filière</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="affectation">Affectation:</label>
+                            <div class="col-sm-9">
+                                <?php echo select("form-control", "affectation", "affectation[]", ["Tronc Commun" => "TC", "Tronc Commun de Branche" => "TCBR", "Filière" => "FCBR"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getAffectation())); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="sem_label">Libellé du semestre:</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="sem_label" name="sem_label[]">
-                                <option value="TC">TC</option>
-                                <option value="ISI">ISI</option>
-                                <option value="SRT">SRT</option>
-                                <option value="MTE">MTE</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="sem_label">Libellé du semestre:</label>
+                            <div class="col-sm-9">
+                                <?php echo select("form-control", "sem_label", "sem_label[]", ["TC" => "TC", "ISI" => "ISI", "SRT" => "SRT", "MTE" => "MTE"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getSemLabel())); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="sem_seq">Numéro de semestre:</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="sem_seq" name="sem_seq[]" placeholder="Entrer numéro semestre"/>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="sem_seq">Numéro de semestre:</label>
+                            <div class="col-sm-9">
+                                <?php echo input("number", "form-control", "sem_seq", "sem_seq[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getSemSeq()), "Entrer numéro semestre"); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="credits">Nombre de crédits:</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="credits" name="credits[]" placeholder="Entrer nombre crédits"/>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="credits">Nombre de crédits:</label>
+                            <div class="col-sm-9">
+                                <?php echo input("number", "form-control", "credits", "credits[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getCredit()), "Entrer nombre crédits"); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="resultat">Résultat:</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="resultat" name="resultat[]">
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                                <option value="FX">FX</option>
-                                <option value="F">F</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="resultat">Résultat:</label>
+                            <div class="col-sm-9">
+                                <?php echo select("form-control", "resultat", "resultat[]", ["A" => "A", "B" => "B", "C" => "C", "D" => "D"
+                                    , "FX" => "FX", "F" => "F"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getResultat())); ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="remove_field_button" align="center">
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+                        <div class="remove_field_button" align="center">
+                            <button type="button" class="btn btn-danger">Supprimer</button>
+                        </div>
                     </div>
                 </div>
+                <br></br>
             </div>
-            <br></br>
+                <?php
+            }
+            ?>
         </div>
-    </div>
 
     <div class="container">
         <div class="col-lg-8 col-lg-offset-2">
@@ -190,12 +184,14 @@ controlePublic();
     $(document).ready(function() {
 
         var wrapper = $(".elements_formation");
-        var element = $(".element").clone(true);
+        var element = $(".element").last().clone();
         var add_button = $(".add_field_button");
 
         $(add_button).click(function(e){
             e.preventDefault();
-            $(element).clone(true).appendTo(wrapper);
+            $(element).clone(true)
+                .find("input,:selected").val("").removeAttr('selected').end()
+                .appendTo(wrapper);
         });
 
         $(".element").on("click",".remove_field_button", function(e){

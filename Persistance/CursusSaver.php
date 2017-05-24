@@ -13,7 +13,7 @@ class CursusSaver
             if(isset($data['num_etu'])){
                 $etudiantQuery = DataBaseManager::getInstance()->prepareAndExecuteQuery("SELECT Count(*) as nb
                 FROM etudiant
-                WHERE numCarteEtu=?",[$data['num_etu']]);
+                WHERE num_carte_etu=?",[$data['num_etu']]);
                 $nb = $etudiantQuery->fetch(PDO::FETCH_ASSOC);
                 if($nb['nb'] > 0) return true;
                 else return false;
@@ -47,7 +47,7 @@ class CursusSaver
     }
 
     public static function insertUser($data){
-        DataBaseManager::getInstance()->prepareAndExecuteQuery("INSERT INTO etudiant (numCarteEtu,nom,prenom,admission,filiere)
+        DataBaseManager::getInstance()->prepareAndExecuteQuery("INSERT INTO etudiant (num_carte_etu,nom,prenom,admission,filiere)
                         VALUES (?,?,?,?,?)",[$data['num_etu'],$data['nom_etu'],$data['prenom_etu'],$data['admission'],$data['filiere']]);
     }
 
@@ -104,6 +104,7 @@ class CursusSaver
                 //Insertion d'un nouvel element de formation effectue
                 CursusSaver::insertElementFormationEffectue($id_cursus,$id_element_formation,$data,$i);
             }
+            return $id_cursus;
         }
     }
 

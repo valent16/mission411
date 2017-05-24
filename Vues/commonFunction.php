@@ -112,4 +112,46 @@ function loadJavaScript(){
     echo "<script type=\"text/javascript\" src=\"assets/JQuery/jquery.min.js\"></script>";
     echo "<script type=\"text/javascript\" src=\"assets/bootstrap/js/bootstrap.min.js\"></script>";
 }
+
+function input($type,$class,$id,$name,$value,$placeholder){
+    $input = "<input ";
+    $input .= "type='$type' ";
+    $input .= "class='$class' ";
+    if(strlen($id) > 0){
+        $input .= "id='$id' ";
+    }
+    $input .= "name='$name' ";
+    if($value != null && strlen($value) > 0){
+        $input .= "value='$value' ";
+    }
+    if(strlen($placeholder) > 0){
+        $input .= "placeholder='$placeholder' ";
+    }
+    $input .= " />";
+
+    return $input;
+}
+
+function select($class,$id,$name,$options,$selected){
+    $select = " <select ";
+    $select .= "class='$class' ";
+    if(strlen($id) >0 ){
+        $select .= "id='$id' ";
+    }
+    $select .= "name='$name' ";
+    $select .= "> ";
+    foreach ($options as $key => $value){
+        $select .= "<option ";
+        $select .= "value='$value' ";
+        if($selected == $value){
+            $select .= "selected ";
+        }
+        $select .= ">";
+        $select .= "$key</option> ";
+    }
+    $select .= "<select>";
+
+    return $select;
+}
+
 ?>
