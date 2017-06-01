@@ -19,7 +19,7 @@ if(isset($_GET["id"])){
 elseif (isset($_POST)){
     $numCursus = CursusSaver::save($_POST);
 }
-$modelCollectionElementFormation = ModelCollectionElementFormation::getModelElementsFormationByIdCursus($numCursus);
+$modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
 $collectionElementFormation = $modelCollectionElementFormation->getData();
 $modelCursus = ModelCursus::getCrususById($numCursus);
 $cursus = $modelCursus->getData();
@@ -84,19 +84,22 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
 
 
         <div class="row text-center">
-            <h1>Récapitulatif du cursus</h1>
-
             <?php
                 //génération de la liste de cursus
                 $elementsFormationsTC = $cursus->getMapSortTC();
                 $elementsFormationsBranche = $cursus->getMapSortBranche();
-                echo "<h1>Elements de formation suivis en TC</h1>";
-                afficherElementsFormation($elementsFormationsTC, true);
+
+                if ($modelEtudiant->getData()->getAdmission() ==='TC'){
+                    echo "<h1>Elements de formation suivis en TC</h1>";
+                    afficherElementsFormation($cursus, $elementsFormationsTC, true);
+                }
+
+
                 echo "<h1>Elements de formation suivis en Branche</h1>";
-                afficherElementsFormation($elementsFormationsBranche, false);
+                afficherElementsFormation($cursus, $elementsFormationsBranche, false);
 
 
-                function afficherElementsFormation($elementsFormations, $isTC){
+                function afficherElementsFormation($cursus, $elementsFormations, $isTC){
                     if ($isTC){
                         $cycle="TC";
                     }else {
@@ -107,6 +110,8 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                         echo "Aucun élément de formation pour le cycle ".$cycle;
                     }
 
+                    $listeElements = array();
+
                     foreach($elementsFormations as $k=>$elementsFormations){
                         echo '
                     <a class="btn btn-primary btn-block margin-bottom-20 " id="Semestre-'.$k.'-'.$cycle.'" >Semestre '.$k.'</a>';
@@ -115,11 +120,15 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                             <div class="panel panel-primary">
                                 <div class="panel-body">
                                     <ul class="list-group">';
+
+                        //Parcours des elements de formation effectués
                         foreach($elementsFormations as $e){
+                            $listeElements[] = $e;
                             echo '<li class="list-group-item">
-                                <span>'.$e->getElementFormation()->getSigle().'</span>
+                                <a data-toggle="modal" href="#'.$e->getSemLabel().''.$e->getElementFormation()->getSigle().'">'.$e->getElementFormation()->getSigle().'</a>
                                 <div class="pull-right action-buttons">
-                                    <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="index.php?action=modifierElementFormation&cursus='.$cursus->getId().'&elementFormation='.$e->getElementFormation()->getIdElementFormation().'&sem='.$e->getSemLabel().'
+                                  "><span class="glyphicon glyphicon-pencil"></span></a>
                                  </div>
                               </li>';
                         }
@@ -127,6 +136,42 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                                 </div>
                             </div>
                         </div>';
+                    }
+                    genererDetailElementFormation($listeElements);
+                }
+
+                //Permet de générer les page présentant le détail des cursus
+                function genererDetailElementFormation($elementsFormations){
+                    foreach($elementsFormations as $e) {
+                        if ($e->getElementFormation()->getUtt()){
+                            $realisationModuleUtt = "oui";
+                        }else{
+                            $realisationModuleUtt = "non";
+                        }
+
+                        echo '
+                        <div class="modal fade" id="' .$e->getSemLabel().''.$e->getElementFormation()->getSigle().'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Détail du module '.$e->getElementFormation()->getSigle().'</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                            <p>Affectation: '.$e->getAffectation().'</p>
+                                            <p>Catégorie:  '.$e->getElementFormation()->getCategorie().'</p>
+                                            <p>UV réalisée à l\'UTT: '.$realisationModuleUtt.'</p>
+                                            <p>Numéro du semestre: '.$e->getSemLabel().'</p>
+                                            <p>Résultat: '.$e->getResultat().'</p>
+                                            <p>Crédits obtenus '.$e->getCredit().'</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        ';
                     }
                 }
 
@@ -141,6 +186,13 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
 
 
     <script>
@@ -168,6 +220,11 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
             });
         });
     </script>
+
+
+
+
+
 
 <?php
     loadFooter();

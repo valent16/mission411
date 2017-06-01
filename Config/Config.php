@@ -16,7 +16,8 @@ class Config{
                     "commonFunction" => $vueDirectory."commonFunction.php",
                     "ajoutCursus" => $vueDirectory."ajoutCursus.php",
                     "applicationReglementCursus" => $vueDirectory."applicationReglementCursus.php",
-                    "detailCursus" => $vueDirectory."detailCursus.php");
+                    "detailCursus" => $vueDirectory."detailCursus.php",
+                    "modifierElementFormation" => $vueDirectory."modificationElementFormation.php");
     }
 
     public static function getCSS(){

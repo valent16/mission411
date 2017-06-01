@@ -35,6 +35,10 @@ class PublicController{
                     require(Config::getViews()["visualisationCursus"]);
                     break;
 
+                case "modifierElementFormation":
+                    require(Config::getViews()["modifierElementFormation"]);
+                    break;
+
                 default :
                     require(Config::getViews()["home"]);
                     break;

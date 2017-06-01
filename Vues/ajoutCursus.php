@@ -16,7 +16,7 @@ $modelEtudiant = null;
 $cursus = null;
 if(isset($_GET['num_cursus'])){
     $numCursus = $_GET['num_cursus'];
-    $modelCollectionElementFormation = ModelCollectionElementFormation::getModelElementsFormationByIdCursus($numCursus);
+    $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
     $collectionElementFormation = $modelCollectionElementFormation->getData();
     $modelCursus = ModelCursus::getCrususById($numCursus);
     $cursus = $modelCursus->getData();

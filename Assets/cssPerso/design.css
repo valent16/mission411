@@ -36,3 +36,22 @@
 .panel-body input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(128, 144, 160); }
 .list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
 .list-group { margin-bottom:0px; }
+
+
+.background-utt{
+    background-image: url('../images/background_utt.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+#body-bg {
+    background-attachment: fixed;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("../images/background_utt3.png");
+    background-origin: padding-box;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    position: relative;
+}

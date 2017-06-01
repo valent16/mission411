@@ -10,7 +10,7 @@ function enTeteHTML($title, $charset, $css_sheet, $class_body){
     }
     echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
 	echo "<title>$title</title>\n";
-	echo "</head>\n<body class=\"$class_body\">\n";
+	echo "</head>\n<body class=\"$class_body\" id=\"body-bg\">\n";
 }	
 
 function finFichierHTML(){
@@ -109,8 +109,8 @@ function EndStructureFichierHTML(){
 }
 
 function loadJavaScript(){
-    echo "<script type=\"text/javascript\" src=\"assets/JQuery/jquery.min.js\"></script>";
-    echo "<script type=\"text/javascript\" src=\"assets/bootstrap/js/bootstrap.min.js\"></script>";
+    echo "<script type=\"text/javascript\" src=\"Assets/JQuery/jquery.min.js\"></script>";
+    echo "<script type=\"text/javascript\" src=\"Assets/bootstrap/js/bootstrap.min.js\"></script>";
 }
 
 function input($type,$class,$id,$name,$value,$placeholder){
