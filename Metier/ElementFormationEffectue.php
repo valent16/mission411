@@ -8,6 +8,8 @@
 
 class ElementFormationEffectue{
 
+    private $identifiant;
+
     private $elementFormation;
 
     private $affectation;
@@ -19,6 +21,22 @@ class ElementFormationEffectue{
     private $credit;
 
     private $resultat;
+
+    /**
+     * @return mixed
+     */
+    public function getIdentifiant()
+    {
+        return $this->identifiant;
+    }
+
+    /**
+     * @param mixed $identifiant
+     */
+    public function setIdentifiant($identifiant)
+    {
+        $this->identifiant = $identifiant;
+    }
 
     /**
      * @return mixed
@@ -116,8 +134,9 @@ class ElementFormationEffectue{
         $this->resultat = $resultat;
     }
 
-    public function __construct($elementFormation, $affectation, $semLabel, $semSeq, $credit, $resultat)
+    public function __construct($id, $elementFormation, $affectation, $semLabel, $semSeq, $credit, $resultat)
     {
+        $this->setIdentifiant($id);
         $this->setElementFormation($elementFormation);
         $this->setAffectation($affectation);
         $this->setSemLabel($semLabel);

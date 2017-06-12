@@ -18,10 +18,28 @@ class ModelElementFormationEffectue extends Model{
         $this->dataError = array();
     }
 
-    public static function getElementFormationEffectue($idCursus, $id_element_formation, $sem_label){
+    public static function getElementFormationEffectueById($id){
         $model = new self(array());
-        $model->element_formation_effectue = ElementFormationGateway::getElementFormationById($model->dataError, $idCursus, $id_element_formation, $sem_label);
+        $model->element_formation_effectue = ElementFormationGateway::getElementFormationById($model->dataError, $id);
         return $model;
     }
 
+    public static function deleteElementFormationEffectue($id){
+        $model = new self(array());
+        $model->element_formation_effectue = ElementFormationGateway::deleteElementFormation($model->dataError, $id);
+        return $model;
+    }
+
+
+    public static function getModelElementFormationPost($elementFormationEffectue){
+        $model = new self(array());
+        $model->element_formation_effectue = ElementFormationGateway::postElementFormation($model->dataError, $elementFormationEffectue);
+        return $model;
+    }
+
+    public static function getModelElementFormationPut($elementFormationEffectue, $id_cursus){
+        $model = new self(array());
+        $model->element_formation_effectue = ElementFormationGateway::putElementFormationEffectue($model->dataError,$elementFormationEffectue,$id_cursus);
+        return $model;
+    }
 }

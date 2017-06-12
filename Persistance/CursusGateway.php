@@ -57,4 +57,25 @@ class CursusGateway
             $dataError['persistance-get'] = "Crusus Introuvable";
         }
     }
+
+    public static function putCursus(&$dataError, $cursus){
+        $statement = false;
+        $count = 0;
+
+        while ($statement === false && $count <=3){
+            $cursus->setId(Config::generateRandomID());
+            $count++;
+            $statement = DataBaseManager::getInstance()->prepareAndExecuteQuery('INSERT INTO cursus(id_cursus, nom_cursus, num_etu) VALUES(?, ?, ?)', array($cursus->getId(), $cursus->getNom(), $cursus->getNumEtu()));
+            if ($statement->rowCount() < 1){
+                $statement = false;
+            }
+        }
+
+        if ($statement === false){
+            $dataError["persistence-put"] = "Problème d'exécution de la requete";
+        }else{
+            DataBaseManager::destroyQueryResults($statement);
+        }
+        return $cursus;
+    }
 }

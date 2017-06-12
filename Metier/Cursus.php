@@ -31,7 +31,7 @@ class Cursus{
         $this->nom = $nom;
     }
 
-    private function setId($id){
+    public function setId($id){
         $this->id = $id;
     }
 

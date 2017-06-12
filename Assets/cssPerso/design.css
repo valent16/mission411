@@ -38,20 +38,48 @@
 .list-group { margin-bottom:0px; }
 
 
-.background-utt{
-    background-image: url('../images/background_utt.jpg');
-    background-size:cover;
-    background-repeat:no-repeat;
+/*#body-bg {*/
+    /*background-attachment: fixed;*/
+    /*background-clip: border-box;*/
+    /*background-color: rgba(0, 0, 0, 0);*/
+    /*background-image: url("../images/background_utt6.jpg");*/
+    /*background-origin: padding-box;*/
+    /*background-position: 50% 0;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover !important;*/
+    /*position: relative;*/
+/*}*/
+
+
+.text-white{
+    color: white;
 }
 
-#body-bg {
-    background-attachment: fixed;
-    background-clip: border-box;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: url("../images/background_utt3.png");
-    background-origin: padding-box;
-    background-position: 50% 0;
-    background-repeat: no-repeat;
-    background-size: cover !important;
-    position: relative;
+/*.container-background{*/
+    /*background: rgba(0,0,0,0.2);*/
+    /*border-radius: 10px;*/
+/*}*/
+
+
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+}
+
+
+.container a{
+    opacity:1;
+}
+
+.container h1{
+    opacity: 1;
+}
+
+
+.container-home{
+    margin-top: 5%;
+    min-height:50%;
 }

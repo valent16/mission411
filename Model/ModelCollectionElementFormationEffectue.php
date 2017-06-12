@@ -20,4 +20,7 @@ class ModelCollectionElementFormationEffectue extends model{
         $model->collectionElementFormation = ElementFormationGateway::getElementFormationByCursus($model->dataError, $idCursus);
         return $model;
     }
+
+
+
 }

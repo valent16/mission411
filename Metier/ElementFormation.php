@@ -79,7 +79,6 @@ class ElementFormation{
         $this->categorie = $categorie;
     }
 
-
     public function __construct($idElementFormation, $sigle, $utt, $categorie)
     {
         $this->setIdElementFormation($idElementFormation);
@@ -87,5 +86,16 @@ class ElementFormation{
         $this->setUtt($utt);
         $this->setCategorie($categorie);
         $this->setSigle($sigle);
+    }
+
+    public function isEqualTo($elementFormation){
+        if ($this->getIdElementFormation() === $elementFormation->getIdElementFormation() &&
+            $this->getCategorie() === $elementFormation->getCategorie() &&
+            $this->getIdElementFormation() === $elementFormation->getIdElementFormation() &&
+            $this->getSigle() === $elementFormation->getSigle() &&
+            $this->getUtt() == $elementFormation->getUtt()){
+            return true;
+        }
+        return false;
     }
 }

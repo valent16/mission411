@@ -39,6 +39,26 @@ class PublicController{
                     require(Config::getViews()["modifierElementFormation"]);
                     break;
 
+                case "enregistrementElementFormation":
+                    require(Config::getReception()['receptionElementFormation']);
+                    break;
+
+                case "receptionCursus":
+                    require(Config::getReception()['receptionCursus']);
+                    break;
+
+                case "suppressionElementFormation":
+                    $id=$_GET['id'];
+                    $modelElementFormation = ModelElementFormationEffectue::deleteElementFormationEffectue($id);
+                    if (false === $modelElementFormation -> getError()){
+                        require(Config::getViews()["detailCursus"]);
+                    }else{
+                        require(Config::getViews()["detailCursus"]);
+//                      echo "coucou";
+                        //require(Config::getVuesErreur()['suppressionActuEchec']);
+                    }
+                    break;
+
                 default :
                     require(Config::getViews()["home"]);
                     break;

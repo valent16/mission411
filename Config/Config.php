@@ -33,6 +33,19 @@ class Config{
         return array("scriptBootstrap" => $scriptDirectory."bootstrap/js/bootstrap.min.js",
                     "jQuery" => $scriptDirectory."JQuery/jquery.min.js");
     }
+
+
+    public static function getReception(){
+        global $rootDirectory;
+        $receptionDirectory = $rootDirectory."Controller/";
+        return array("receptionElementFormation" => $receptionDirectory."receptionElementFormation.php",
+                    "receptionCursus" =>  $receptionDirectory."receptionCursus.php"
+        );
+    }
+
+    public static function generateRandomId(){
+        return rand(0,9999999999);
+    }
 }
 
 ?>

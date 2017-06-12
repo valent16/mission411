@@ -22,4 +22,10 @@ class ModelCursus extends model{
         $model->cursus = CursusGateway::getCursusById($model->dataError,$id);
         return $model;
     }
+
+    public static function getModelCursusPut($cursus){
+        $model = new self(array());
+        $model->cursus = CursusGateway::putCursus($model->dataError, $cursus);
+        return $model;
+    }
 }

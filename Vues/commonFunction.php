@@ -17,40 +17,6 @@ function finFichierHTML(){
 	echo "</body<\n</html>\n";
 }
 
-function StructureFichierHTML(){
-	echo "<div id=\"page-wrapper\">\n";
-	echo "<div id=\"header-wrapper\">\n";
-	echo "<div id=\"banner\">\n";
-	echo "<img src=\"Ressources/banner.jpg\"/>\n";
-	echo "</div>\n";
-	echo "<div id=\"header\">\n";
-	echo "<nav id=\"nav\">\n";
-	echo "<ul>\n";
-	echo "<li class=\"current\"><a href=\"index.php?action=default\">Accueil</a></li>\n";
-	echo "<li>\n";
-	echo "<a href=\"#\">Episodes</a>\n";
-	echo "<ul>\n";
-	echo "<li><a href=\"index.php?action=episode13\">Saison 3 Episode 13</a></li>\n";
-	echo "<li><a href=\"index.php?action=episode12\">Saison 3 Episode 12</a></li>\n";
-	echo "<li><a href=\"index.php?action=episode11\">Saison 3 Episode 11</a></li>\n";
-	echo "<li><a href=\"index.php?action=episode10\">Saison 3 Episode 10</a></li>\n";
-	echo "</ul>\n";
-	echo "</li>\n";					
-	echo "<li>\n";
-	echo "<a href=\"#\">Media</a>\n";
-	echo "<ul>\n";
-	echo "<li><a href=\"#\">Photos</a></li>\n";
-	echo "<li><a href=\"#\">Videos</a></li>\n";
-	echo "</ul>\n";
-	echo "</li>\n";				
-	echo "<li>\n";
-	echo "<a href=\"index.php?action=affichePersonnage\">Personnages</a>\n";
-	echo "</li>\n";
-	echo "<li><a href=\"index.php?action=synopsis\">Synopsis</a></li>\n";
-	echo "</ul>\n";
-	echo "</nav>\n";
-}
-
 //fonction permettant de générer la barre d'entêtes du document
 function controlePublic(){
     echo '<div>

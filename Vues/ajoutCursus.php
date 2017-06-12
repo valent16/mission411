@@ -36,8 +36,8 @@ if(isset($_GET['num_cursus'])){
     </div>
 </div>
 
-<form class="form-horizontal" method="post" action="index.php">
-    <input type="hidden" name="action" value="detailCursus" />
+<form class="form-horizontal" method="post" action="index.php?action=receptionCursus">
+<!--    <input type="hidden" name="action" value="detailCursus" />-->
     <div class="container">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="form-group">

@@ -20,4 +20,8 @@ class ModelCollectionElementFormation extends model{
         $model->collectionElementFormation = ElementFormationGateway::getElementFormationByCursus($model->dataError, $idCursus);
         return $model;
     }
+
+    public static function getModelElementsFormationPut($cursus, $elementFormation){
+        
+    }
 }

@@ -48,15 +48,32 @@ class EtudiantGateway{
                     $count++;
                 }
                 if ($count != 1) {
-                    $dataError['persistance-get'] = "Cursus Introuvable";
+                    $dataError['persistance-get'] = "Etudiant Introuvable";
                 }
                 return $etudiant;
             } else {
-                $dataError['persistance-get'] = "Cursus Introuvable";
+                $dataError['persistance-get'] = "Etudiant Introuvable";
             }
         }else{
-            $dataError['persistance-get'] = "Crusus Introuvable";
+            $dataError['persistance-get'] = "Etudiant Introuvable";
         }
+    }
+
+    public static function putEtudiant(&$dataError, $etudiant){
+        $statement = false;
+        $count = 0;
+
+        $statement = DataBaseManager::getInstance()->prepareAndExecuteQuery('INSERT INTO etudiant(num_carte_etu, nom, prenom, admission, filiere) VALUES(?, ?, ?, ?, ?)', array($etudiant->getNumCarteEtu(), $etudiant->getNom(), $etudiant->getPrenom(), $etudiant->getAdmission(), $etudiant->getfiliere()));
+        if ($statement->rowCount() < 1){
+            $statement = false;
+        }
+
+        if ($statement === false){
+            $dataError["persistence-put"] = "Problème d'exécution de la requete";
+        }else{
+            DataBaseManager::destroyQueryResults($statement);
+        }
+        return $etudiant;
     }
 }
 

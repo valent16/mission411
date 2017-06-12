@@ -13,12 +13,12 @@ enTeteHTML("Récapitulation cursus", "UTF-8", Config::getCSS(), "");
 controlePublic();
 
 $numCursus = null;
-if(isset($_GET["id"])){
-    $numCursus = $_GET["id"];
+if(isset($_GET["id_cursus"])){
+    $numCursus = $_GET["id_cursus"];
 }
-elseif (isset($_POST)){
-    $numCursus = CursusSaver::save($_POST);
-}
+//elseif (isset($_POST)){
+//    $numCursus = CursusSaver::save($_POST);
+//}
 $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
 $collectionElementFormation = $modelCollectionElementFormation->getData();
 $modelCursus = ModelCursus::getCrususById($numCursus);
@@ -127,7 +127,7 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                             echo '<li class="list-group-item">
                                 <a data-toggle="modal" href="#'.$e->getSemLabel().''.$e->getElementFormation()->getSigle().'">'.$e->getElementFormation()->getSigle().'</a>
                                 <div class="pull-right action-buttons">
-                                    <a href="index.php?action=modifierElementFormation&cursus='.$cursus->getId().'&elementFormation='.$e->getElementFormation()->getIdElementFormation().'&sem='.$e->getSemLabel().'
+                                    <a href="index.php?action=modifierElementFormation&id='.$e->getIdentifiant().'&id_cursus='.$cursus->getId().'
                                   "><span class="glyphicon glyphicon-pencil"></span></a>
                                  </div>
                               </li>';
@@ -187,14 +187,6 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
     </div>
 </div>
 
-
-
-
-
-
-
-
-
     <script>
         $( document ).ready(function() {
             $('#div-Semestre-1').hide();
@@ -220,12 +212,6 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
             });
         });
     </script>
-
-
-
-
-
-
 <?php
     loadFooter();
     loadJavaScript();

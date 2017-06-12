@@ -36,4 +36,10 @@ class ModelEtudiant extends Model{
         $model->setEtudiant(EtudiantGateway::getEtudiantByNumEtu($numEtu));
         return $model;
     }
+
+    public static function getModelEtudiantPut($etudiant){
+        $model = new self(array());
+        $model->etudiant = EtudiantGateway::putEtudiant($model->dataError, $etudiant);
+        return $model;
+    }
 }

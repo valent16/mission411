@@ -25,8 +25,7 @@
 ?>
 
 
-
-<div class="container">
+<div class="container container-background ">
     <div class="col-lg-8 col-lg-offset-2">
         <div class="text-center">
             <h1>Bienvenue sur l'outil de manipulation de cursus des étudiants</h1>
@@ -40,10 +39,7 @@
             </p>
         </div>
     </div>
-</div>
 
-
-<div class="container">
     <div class="col-lg-6 col-lg-offset-3">
         <form >
             <div class="form-group">
@@ -65,7 +61,7 @@
             <table class="table-striped table table-hover">
             <?php
                 foreach ($collectionCursus as $c){
-                    $loc = "index.php?action=detailCursus&id=".$c->getId();
+                    $loc = "index.php?action=detailCursus&id_cursus=".$c->getId();
                     echo "<tr class=\"ligne-selectionnable nomCursus\"onclick=\"document.location='".$loc."'\">";
                     echo "<td class=\"nom_cursus col-lg-6\">".$c->getNom()."</td>";
                     echo "<td class=\"nom_etu col-lg-3\">".$mapEtudiant[$c->getNumEtu()]->getNom()."</td>";
