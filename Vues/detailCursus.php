@@ -7,24 +7,31 @@
  */
 
 require_once(Config::getViews()["commonFunction"]);
-enTeteHTML("Récapitulation cursus", "UTF-8", Config::getCSS(), "");
-//var_dump($_POST);
-//CursusSaver::save($_POST);
-controlePublic();
 
 $numCursus = null;
 if(isset($_GET["id_cursus"])){
     $numCursus = $_GET["id_cursus"];
 }
-//elseif (isset($_POST)){
-//    $numCursus = CursusSaver::save($_POST);
-//}
+
+if(isset($_GET["export"])){
+    //On exporte le cursus du monsieur en CSV
+    Export::toCSV($numCursus);
+}
+
+enTeteHTML("Récapitulation cursus", "UTF-8", Config::getCSS(), "");
+//var_dump($_POST);
+//CursusSaver::save($_POST);
+controlePublic();
+
+
 $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
 $collectionElementFormation = $modelCollectionElementFormation->getData();
 $modelCursus = ModelCursus::getCrususById($numCursus);
 $cursus = $modelCursus->getData();
 $cursus->affectationElementsFormation($collectionElementFormation);
 $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
+
+
 
 ?>
 <div class="container">
@@ -181,6 +188,16 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                 <?php echo "<input type='hidden' name='num_cursus' value='".$numCursus."'/>"; ?>
                 <div class="col-lg-8 col-lg-offset-2" align="center">
                     <button type="submit" class="btn btn-primary">Modifier Cursus</button>
+                </div>
+            </form>
+            </br>
+            </br>
+            <form class="form-horizontal" method="get" action="index.php">
+                <input type="hidden" name="action" value="detailCursus"/>
+                <input type="hidden" name="export" value="export" />
+                <?php echo "<input type='hidden' name='id_cursus' value='".$numCursus."'/>"; ?>
+                    <div class="col-lg-8 col-lg-offset-2" align="center">
+                    <button type="submit" class="btn btn-primary">Exporter en CSV</button>
                 </div>
             </form>
         </div>

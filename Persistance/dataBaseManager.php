@@ -8,7 +8,7 @@ class DataBaseManager{
 	static private $db_host="mysql:host=localhost;";
 	static private $db_name="dbname=mission411";
 	static private $db_user="root";
-	static private $db_password="ptrx160";
+	static private $db_password="";
 	
 	private function __construct(){
 		try{

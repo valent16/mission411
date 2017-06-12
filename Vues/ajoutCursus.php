@@ -12,6 +12,8 @@ require_once(Config::getViews()["commonFunction"]);
 enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
 controlePublic();
 
+
+
 $modelEtudiant = null;
 $cursus = null;
 if(isset($_GET['num_cursus'])){
@@ -160,9 +162,9 @@ if(isset($_GET['num_cursus'])){
                 </div>
                 <br></br>
             </div>
-                <?php
-            }
-            ?>
+            <?php
+        }
+        ?>
         </div>
 
     <div class="container">
@@ -205,6 +207,16 @@ if(isset($_GET['num_cursus'])){
             e.preventDefault();
             $(this).parent('div').parent('div').parent('div').remove();
         });
+
+        $('#sigle').on('input', function() {
+            console.log("Input");
+            if($(this).val().length == 4) {
+                console.log("4 char");
+                var sigle = $(this).val();
+
+            }
+        });
+
     });
 </script>
 

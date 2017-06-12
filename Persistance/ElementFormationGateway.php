@@ -16,8 +16,6 @@ class ElementFormationGateway{
                 $dataError['persistance-get'] = "Impossible d'accéder aux données";
             }
 
-
-
             if ($stmt !== false) {
                 $count = 0;
                 foreach ($stmt as $row) {

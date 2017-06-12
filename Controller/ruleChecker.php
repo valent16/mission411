@@ -39,6 +39,7 @@ function isAffected($elementsFormation,$affectation){
         return false;
     }
 }
+
 function sum($elementsFormationEffectue,$cadre, $categories,$affectation){
     $total = 0;
     foreach ($elementsFormationEffectue as $efe){
@@ -54,6 +55,7 @@ function sum($elementsFormationEffectue,$cadre, $categories,$affectation){
     }
     return $total;
 }
+
 function exist($elementsFormationEffectue, $categorie, $affectation){
     $total = -1;
     foreach ($elementsFormationEffectue as $efe){
@@ -63,6 +65,7 @@ function exist($elementsFormationEffectue, $categorie, $affectation){
     }
     return $total;
 }
+
 foreach($regulation->getRules() as $rule){
     //Pour chacune des règles du règlement
     switch ($rule->getRule()){
