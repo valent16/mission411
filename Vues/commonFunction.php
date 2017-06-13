@@ -47,9 +47,6 @@ function controlePublic(){
                                         <input type="file" name="cursusCSV" id="cursusCSV" style="display:none" onchange="document.getElementById(\'importCursus\').click()">
                                     </form>
                                 </li>
-                                <li>
-                                    <a href="#">Importer Règlement</a>
-                                </li>
                             </ul>
                         </li>
                     </ul>
