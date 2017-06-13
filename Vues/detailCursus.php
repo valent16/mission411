@@ -28,15 +28,12 @@ enTeteHTML("Récapitulation cursus", "UTF-8", Config::getCSS(), "");
 //CursusSaver::save($_POST);
 controlePublic();
 
-
 $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
 $collectionElementFormation = $modelCollectionElementFormation->getData();
 $modelCursus = ModelCursus::getCursusById($numCursus);
 $cursus = $modelCursus->getData();
 $cursus->affectationElementsFormation($collectionElementFormation);
 $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
-
-
 
 ?>
 <div class="container">
@@ -70,7 +67,7 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                     Sélectionnez un règlement dans la liste déroulante ci dessous puis cliquez sur visualiser
                 </p>
 
-                <form class="form-horizontal" method="get" action="index.php" target="_blank">
+                <form class="form-horizontal" method="get" action="index.php?action=applicationReglementCursus" target="_blank">
                     <input type="hidden" name="action" value="applicationReglementCursus" />
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="reglement">Règlement:</label>

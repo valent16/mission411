@@ -58,11 +58,14 @@ class Import
                     echo $cursus->getId().'</br>';
                 }
                 if($data[0] == 'EL'){
+                    echo "coucu";
+
                     $modelElementFormationEffectue = ModelElementFormationEffectue::getModelElementFormationPut(
-                        new ElementFormationEffectue(null,new ElementFormation(
-                            null,$data[3],$data[6],$data[4]
+                        new ElementFormationEffectue(0,new ElementFormation(
+                            0,$data[3],$data[6],$data[4]
                         ),$data[5],$data[2],$data[1],$data[8],$data[9]),$cursus->getId()
                     );
+                    print_r($modelElementFormationEffectue->getError());
                     $elementFormation = $modelElementFormationEffectue->getData();
                     echo $elementFormation->getIdentifiant().'</br>';
                 }

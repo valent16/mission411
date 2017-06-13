@@ -13,7 +13,6 @@ enTeteHTML("Ajout d'un Cursus", "UTF-8", Config::getCSS(), "");
 controlePublic();
 
 
-
 $modelEtudiant = null;
 $cursus = null;
 if(isset($_GET['num_cursus'])){
@@ -152,7 +151,7 @@ if(isset($_GET['num_cursus'])){
                             <label class="control-label col-sm-3" for="resultat">Résultat:</label>
                             <div class="col-sm-9">
                                 <?php echo select("form-control", "resultat", "resultat[]", ["A" => "A", "B" => "B", "C" => "C", "D" => "D"
-                                    , "FX" => "FX", "F" => "F"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getResultat())); ?>
+                                    , "FX" => "FX", "F" => "F","ADM"=>"ADM","EQU"=>"EQU"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getResultat())); ?>
                             </div>
                         </div>
                         <div class="remove_field_button" align="center">

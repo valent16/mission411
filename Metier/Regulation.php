@@ -15,8 +15,7 @@ class Regulation
     public function __construct($title)
     {
         $this->title = $title;
-
-        $handle = fopen("../Ressources/" . $title . ".csv", 'r');
+        $handle = fopen(dirname(__FILE__)."/../Ressources/" . $title . ".csv", 'r');
         if ($handle) {
             while (!feof($handle)) {
                 array_push($this->rules, new Rule(fgets($handle)));

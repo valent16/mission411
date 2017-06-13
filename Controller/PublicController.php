@@ -47,6 +47,10 @@ class PublicController{
                     require(Config::getReception()['receptionCursus']);
                     break;
 
+                case "applicationReglementCursus":
+                    require(Config::getViews()["applicationReglementCursus"]);
+                    break;
+
                 case "suppressionElementFormation":
                     $id=$_GET['id'];
                     $modelElementFormation = ModelElementFormationEffectue::deleteElementFormationEffectue($id);
