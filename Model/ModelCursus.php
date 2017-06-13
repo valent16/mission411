@@ -17,7 +17,7 @@ class ModelCursus extends model{
         return $this->cursus;
     }
 
-    public static function getCrususById($id){
+    public static function getCursusById($id){
         $model = new self(array());
         $model->cursus = CursusGateway::getCursusById($model->dataError,$id);
         return $model;

@@ -71,7 +71,15 @@
             ?>
             </table>
         </div>
+        <form action="index.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="detailCursus"/>
+            <div class="form-group" align="center">
+                <input type="file" name="cursusCSV" id="cursusCSV">
+                <input type="submit" value="Importer" name="submit">
+            </div>
+        </form>
     </div>
+
 </div>
 
 

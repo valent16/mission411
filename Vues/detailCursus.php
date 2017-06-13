@@ -18,6 +18,11 @@ if(isset($_GET["export"])){
     Export::toCSV($numCursus);
 }
 
+if(isset($_FILES['cursusCSV'])){
+    //On importe le cursus du monsieur et on retourne le numéro de cursus
+    $numCursus = Import::fromCSV($_FILES['cursusCSV']['tmp_name'],$_FILES['cursusCSV']['name']);
+}
+
 enTeteHTML("Récapitulation cursus", "UTF-8", Config::getCSS(), "");
 //var_dump($_POST);
 //CursusSaver::save($_POST);
@@ -26,7 +31,7 @@ controlePublic();
 
 $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
 $collectionElementFormation = $modelCollectionElementFormation->getData();
-$modelCursus = ModelCursus::getCrususById($numCursus);
+$modelCursus = ModelCursus::getCursusById($numCursus);
 $cursus = $modelCursus->getData();
 $cursus->affectationElementsFormation($collectionElementFormation);
 $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());

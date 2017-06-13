@@ -42,4 +42,11 @@ class ModelEtudiant extends Model{
         $model->etudiant = EtudiantGateway::putEtudiant($model->dataError, $etudiant);
         return $model;
     }
+
+    public static function etudiantExist($numEtu){
+        if(EtudiantGateway::existEtudiant($numEtu)){
+            return true;
+        }
+        else return false;
+    }
 }

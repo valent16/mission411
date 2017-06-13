@@ -8,7 +8,6 @@
 
 class EtudiantGateway{
 
-
     //retourne un dictionnaire avec en clef le numéro de l'étudiant et en valeur l'étudiant correspondant
     public static function getAllEtudiantsMap(){
         try{
@@ -74,6 +73,15 @@ class EtudiantGateway{
             DataBaseManager::destroyQueryResults($statement);
         }
         return $etudiant;
+    }
+
+    public static function existEtudiant($numEtu){
+        $etudiantQuery = DataBaseManager::getInstance()->prepareAndExecuteQuery("SELECT Count(*) as nb
+                FROM etudiant
+                WHERE num_carte_etu=?",[$numEtu]);
+        $nb = $etudiantQuery->fetch(PDO::FETCH_ASSOC);
+        if($nb['nb'] > 0) return true;
+        else return false;
     }
 }
 
