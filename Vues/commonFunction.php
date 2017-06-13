@@ -41,11 +41,10 @@ function controlePublic(){
                                     <a href="index.php?action=ajoutCursus">Ajouter Cursus</a>
                                 </li>
                                 <li>
-                                    <a href="#" onclick="document.getElementById(\'uploadCursus\').click()">Importer Cursus</a>
-                                    <form action="index.php" method="post" enctype="multipart/form-data">         
-                                        <input type="hidden" name="action" value="detailCursus"/>
+                                    <a href="#" onclick="document.getElementById(\'cursusCSV\').click()">Importer Cursus</a>
+                                    <form action="index.php?action=detailCursus" method="post" enctype="multipart/form-data">         
                                         <input type="submit" name="submitFile" style="display:none" id="importCursus">
-                                        <input type="file" name="uploadCursus" id="uploadCursus" style="display:none" onchange="document.getElementById(\'importCursus\').click()">
+                                        <input type="file" name="cursusCSV" id="cursusCSV" style="display:none" onchange="document.getElementById(\'importCursus\').click()">
                                     </form>
                                 </li>
                                 <li>
@@ -91,10 +90,12 @@ function input($type,$class,$id,$name,$value,$placeholder){
     $input = "<input ";
     $input .= "type='$type' ";
     $input .= "class='$class' ";
+
     if(strlen($id) > 0){
         $input .= "id='$id' ";
     }
     $input .= "name='$name' ";
+
     if($value != null && strlen($value) > 0){
         $input .= "value='$value' ";
     }

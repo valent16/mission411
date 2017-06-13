@@ -98,4 +98,11 @@ class ElementFormation{
         }
         return false;
     }
+
+    public function toString(){
+        echo $this->idElementFormation."--";
+        echo $this->sigle."--";
+        echo $this->utt."--";
+        echo $this->categorie."--";
+    }
 }

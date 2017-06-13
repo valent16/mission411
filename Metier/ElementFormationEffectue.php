@@ -145,4 +145,17 @@ class ElementFormationEffectue{
         $this->setResultat($resultat);
     }
 
+    public function toString(){
+        echo $this->identifiant."--";
+        echo $this->affectation."--";
+        echo $this->semLabel."--";
+        echo $this->semSeq."--";
+        echo $this->credit."--";
+        echo $this->resultat."--";
+
+        echo "</br>";
+        $this->elementFormation->toString();
+        echo "</br>";
+        echo "</br>";
+    }
 }

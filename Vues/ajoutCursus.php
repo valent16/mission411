@@ -113,7 +113,7 @@ if(isset($_GET['num_cursus'])){
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="utt">Validé à l'UTT</label>
                             <div class="col-sm-2">
-                                <?php echo select("form-control", "utt", "utt", ["Oui" => "oui", "Non" => "non"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getUtt())); ?>
+                                <?php echo select("form-control", "utt", "utt[]", ["Oui" => "oui", "Non" => "non"], ($cursus==null ? "cc" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getUtt())); ?>
                             </div>
                         </div>
                         <div class="form-group">

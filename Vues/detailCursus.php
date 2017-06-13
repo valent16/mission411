@@ -24,8 +24,6 @@ if(isset($_FILES['cursusCSV'])){
 }
 
 enTeteHTML("Récapitulation cursus", "UTF-8", Config::getCSS(), "");
-//var_dump($_POST);
-//CursusSaver::save($_POST);
 controlePublic();
 
 $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
