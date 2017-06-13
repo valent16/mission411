@@ -191,7 +191,7 @@ if(isset($_GET['num_cursus'])){
         $(add_button).click(function(e){
             e.preventDefault();
             $(element).clone(true)
-                .find("input,:selected").val("").removeAttr('selected').end()
+                .find("input").val("").removeAttr('selected').end()
                 .appendTo(wrapper);
         });
 

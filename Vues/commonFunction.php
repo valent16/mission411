@@ -41,6 +41,14 @@ function controlePublic(){
                                     <a href="index.php?action=ajoutCursus">Ajouter Cursus</a>
                                 </li>
                                 <li>
+                                    <a href="#" onclick="document.getElementById(\'uploadCursus\').click()">Importer Cursus</a>
+                                    <form action="index.php" method="post" enctype="multipart/form-data">         
+                                        <input type="hidden" name="action" value="detailCursus"/>
+                                        <input type="submit" name="submitFile" style="display:none" id="importCursus">
+                                        <input type="file" name="uploadCursus" id="uploadCursus" style="display:none" onchange="document.getElementById(\'importCursus\').click()">
+                                    </form>
+                                </li>
+                                <li>
                                     <a href="#">Importer Règlement</a>
                                 </li>
                             </ul>
