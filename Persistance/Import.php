@@ -70,4 +70,9 @@ class Import
         return $cursus->getId();
     }
 
+    public static function reglement($regulationFile){
+        $path = dirname(__FILE__).'/../Ressources/reglements/'.$regulationFile['name'];
+        move_uploaded_file($regulationFile['tmp_name'],$path);
+    }
+
 }

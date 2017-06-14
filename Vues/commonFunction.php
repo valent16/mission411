@@ -1,6 +1,11 @@
 <?php
 
 function enTeteHTML($title, $charset, $css_sheet, $class_body){
+
+    if(isset($_FILES['reglementCSV'])){
+        Import::reglement($_FILES['reglementCSV']);
+    }
+
 	echo "<!doctype html>\n";
 	echo "<html lang=\"fr\">\n";
 	echo "<head>\n";
@@ -43,8 +48,15 @@ function controlePublic(){
                                 <li>
                                     <a href="#" onclick="document.getElementById(\'cursusCSV\').click()">Importer Cursus</a>
                                     <form action="index.php?action=detailCursus" method="post" enctype="multipart/form-data">         
-                                        <input type="submit" name="submitFile" style="display:none" id="importCursus">
+                                        <input type="submit" name="importCursus" style="display:none" id="importCursus">
                                         <input type="file" name="cursusCSV" id="cursusCSV" style="display:none" onchange="document.getElementById(\'importCursus\').click()">
+                                    </form>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="document.getElementById(\'reglementCSV\').click()">Importer Règlement</a>
+                                    <form action="#" method="post" enctype="multipart/form-data">         
+                                        <input type="submit" name="importReglement" style="display:none" id="importReglement">
+                                        <input type="file" name="reglementCSV" id="reglementCSV" style="display:none" onchange="document.getElementById(\'importReglement\').click()">
                                     </form>
                                 </li>
                             </ul>

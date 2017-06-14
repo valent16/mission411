@@ -70,9 +70,15 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="reglement">Règlement:</label>
                         <div class="col-sm-8">
-                            <select class="form-control" id="reglement" name="reglement">
-                                <option value="R_ACTUEL_BR">Règlement actuel de branche</option>
-                            </select>
+                            <?php
+                                $files = scandir(dirname(__FILE__).'/../Ressources/reglements');
+                                $reglements=[];
+                                for($i=2;$i<count($files);$i++){
+                                    $name = explode('.',$files[$i])[0];
+                                    $reglements[$name] = $name;
+                                }
+                                echo select("form-control","reglement","reglement",$reglements,"");
+                            ?>
                         </div>
 
                         <?php

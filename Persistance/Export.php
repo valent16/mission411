@@ -15,7 +15,7 @@ class Export
         $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
         $collectionElementFormation = $modelCollectionElementFormation->getData();
 
-        $modelCursus = ModelCursus::getCrususById($numCursus);
+        $modelCursus = ModelCursus::getCursusById($numCursus);
         $cursus = $modelCursus->getData();
 
         $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
