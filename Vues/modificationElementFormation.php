@@ -37,7 +37,7 @@ if (isset($_GET["id"])) {
             <div class="form-group">
                 <label class="control-label col-sm-3" for="sigle">Sigle:</label>
                 <div class="col-sm-9">
-                    <?php echo input("text", "form-control", "sigle", "sigle", $elementFormationEffectue->getElementFormation()->getSigle(), "Entrer sigle"); ?>
+                    <?php echo input("text", "form-control", "sigle", "sigle", $elementFormationEffectue->getElementFormation()->getSigle(), "^[a-zA-Z0-9]{2,9}$", "Entrez un sigle"); ?>
                 </div>
             </div>
             <div class="form-group w-100">
@@ -63,22 +63,19 @@ if (isset($_GET["id"])) {
             <div class="form-group">
                 <label class="control-label col-sm-3" for="sem_label">Libellé du semestre:</label>
                 <div class="col-sm-9">
-                    <?php //echo select("form-control", "sem_label", "sem_label", ["TC" => "TC", "ISI" => "ISI", "SRT" => "SRT", "MTE" => "MTE"],$elementFormationEffectue->getSemLabel());
-                    ?>
-                    <?php echo input("text", "form-control", "sem_label", "sem_label", $elementFormationEffectue->getSemLabel(), "Entrer label semestre");?>
-
+                    <?php echo input("text", "form-control", "sem_label", "sem_label", $elementFormationEffectue->getSemLabel(), "^[a-zA-Z0-9]{1,9}$","Entrer label semestre");?>
                     </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="sem_seq">Numéro de semestre:</label>
                 <div class="col-sm-9">
-                    <?php echo input("number", "form-control", "sem_seq", "sem_seq", $elementFormationEffectue->getSemSeq(), "Entrer numéro semestre"); ?>
+                    <?php echo input("number", "form-control", "sem_seq", "sem_seq", $elementFormationEffectue->getSemSeq(), "^[0-9]{1,2}$", "Entrer numéro semestre"); ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="credits">Nombre de crédits:</label>
                 <div class="col-sm-9">
-                    <?php echo input("number", "form-control", "credits", "credits", $elementFormationEffectue->getCredit(), "Entrer nombre crédits"); ?>
+                    <?php echo input("number", "form-control", "credits", "credits", $elementFormationEffectue->getCredit(), "^[0-9]{1,2}$", "Entrer nombre crédits"); ?>
                 </div>
             </div>
             <div class="form-group">

@@ -140,7 +140,6 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                         //Parcours des elements de formation effectués
                         foreach($elementsFormations as $e){
                             $listeElements[] = $e;
-                            echo $e->getElementFormation()->getSigle();
                             echo '<li class="list-group-item">
                                 <a data-toggle="modal" href="#'.$e->getSemLabel().''.$e->getElementFormation()->getSigle().'">'.$e->getElementFormation()->getSigle().'</a>
                                 <div class="pull-right action-buttons">
@@ -192,14 +191,10 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                     }
                 }
 
+            echo '</br></br>';
+            echo '<a type="button" class="btn btn-primary" href="index.php?action=modifierCursus&num_cursus='.$numCursus.'">Modifier Cursus</a>';
             ?>
-            <form class="form-horizontal" method="get" action="index.php">
-                <input type="hidden" name="action" value="ajoutCursus"/>
-                <?php echo "<input type='hidden' name='num_cursus' value='".$numCursus."'/>"; ?>
-                <div class="col-lg-8 col-lg-offset-2" align="center">
-                    <button type="submit" class="btn btn-primary">Modifier Cursus</button>
-                </div>
-            </form>
+
             </br>
             </br>
             <form class="form-horizontal" method="get" action="index.php">

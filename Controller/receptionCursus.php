@@ -22,13 +22,8 @@ for ($i=0;$i<$nbElementFormation;$i++) {
     }
     $elementFormation = new ElementFormation("0", $_POST['sigle'][$i], $utt, $_POST['categorie'][$i]);
     $elementFormationEffectue = new ElementFormationEffectue("0", $elementFormation, $_POST['affectation'][$i], $_POST['sem_label'][$i], $_POST['sem_seq'][$i], $_POST['credits'][$i], $_POST['resultat'][$i]);
-
-    $elementFormationEffectue->toString();
     $modelElementFormationEffectue = ModelElementFormationEffectue::getModelElementFormationPut($elementFormationEffectue, $modelCursus->getData()->getId());
-
-    //affectation, sem_label, resultat
-    //categorie
 }
 
-//require (Config::getViews()['home']);
+require (Config::getViews()['home']);
 ?>

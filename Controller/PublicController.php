@@ -23,6 +23,19 @@ class PublicController{
                     require(Config::getViews()["ajoutCursus"]);
                     break;
 
+                case "modifierCursus":
+                    $modif = true;
+                    require(Config::getViews()["ajoutCursus"]);
+                    break;
+
+                case "effectuerModif":
+                    $id_cursus = $_GET['id_cursus'];
+                    if (isset($id_cursus)){
+                        ModelCursus::getModelDeleteCursus($id_cursus);
+                    }
+                    require(Config::getReception()['receptionCursus']);
+                    break;
+
                 case "home":
                     require(Config::getViews()["home"]);
                     break;

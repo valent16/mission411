@@ -81,9 +81,7 @@ class ElementFormationGateway{
 
     public static function postElementFormation(&$dataError, $elementFormationEffectue){
         $compteElementFormation = self::countElementFormationEffectue($elementFormationEffectue->getElementFormation()->getIdElementFormation());
-        echo "coucou";
         if ($compteElementFormation > 1){
-            echo "coucou";
             $elementFormation = self::getElementFormationById($dataError, $elementFormationEffectue->getElementFormation()->getIdElementFormation());
             if (!$elementFormation->getElementFormation()->isEqualTo($elementFormationEffectue->getElementFormation())){
                 $statement = false;

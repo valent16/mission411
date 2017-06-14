@@ -10,7 +10,7 @@ class Export
 {
     public static function toCSV($numCursus){
         header('Content-Type: text/csv');
-        header("Content-Disposition: attachment; filename='cursus".$numCursus.".csv'");
+        header("Content-Disposition: attachment; filename=cursus".$numCursus.".csv");
 
         $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
         $collectionElementFormation = $modelCollectionElementFormation->getData();

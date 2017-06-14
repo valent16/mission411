@@ -19,7 +19,7 @@ if(isset($_GET['num_cursus'])){
     $numCursus = $_GET['num_cursus'];
     $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
     $collectionElementFormation = $modelCollectionElementFormation->getData();
-    $modelCursus = ModelCursus::getCrususById($numCursus);
+    $modelCursus = ModelCursus::getCursusById($numCursus);
     $cursus = $modelCursus->getData();
     $cursus->affectationElementsFormation($collectionElementFormation);
     $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
@@ -30,12 +30,28 @@ if(isset($_GET['num_cursus'])){
 <div class="container" xmlns="http://www.w3.org/1999/html">
     <div class="col-lg-8 col-lg-offset-2">
         <div class="text-center">
-            <h1>Bienvenue sur l'outil d'ajout de cursus</h1>
+            <?php
+                if (isset($modif)){
+                    echo '<h1>Bienvenue sur l\'outil de modification de cursus</h1>';
+                }else{
+                    echo '<h1>Bienvenue sur l\'outil d\'ajout de cursus</h1>';
+                }
+            ?>
             </br>
             </br>
         </div>
     </div>
 </div>
+
+<?php
+    if (isset($modif)){
+        echo '<form class="form-horizontal" method="post" action="index.php?action=effectuerModif&id_cursus='.$numCursus.'">';
+    }else{
+        echo '<form class="form-horizontal" method="post" action="index.php?action=receptionCursus">';
+    }
+?>
+
+
 
 <form class="form-horizontal" method="post" action="index.php?action=receptionCursus">
 <!--    <input type="hidden" name="action" value="detailCursus" />-->
@@ -107,7 +123,7 @@ if(isset($_GET['num_cursus'])){
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="sigle">Sigle:</label>
                             <div class="col-sm-9">
-                                <?php echo input("text", "form-control", "sigle", "sigle[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getSigle()),"^[a-zA-Z0-9]{4,6}$", "Entrer sigle"); ?>
+                                <?php echo input("text", "form-control", "sigle", "sigle[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getSigle()),"^[a-zA-Z0-9]{2,6}$", "Entrer sigle"); ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -132,7 +148,8 @@ if(isset($_GET['num_cursus'])){
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="sem_label">Libellé du semestre:</label>
                             <div class="col-sm-9">
-                                <?php echo select("form-control", "sem_label", "sem_label[]", ["TC" => "TC", "ISI" => "ISI", "SRT" => "SRT", "MTE" => "MTE"], ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getSemLabel())); ?>
+                                <?php echo input("text", "form-control", "sem_label", "sem_label[]", ($cursus==null ? "" :  $cursus->getElementsFormationEffectues()[$i]->getSemLabel()),"^[a-zA-Z0-9]{1,9}$", "Entrer nombre crédits"); ?>
+
                             </div>
                         </div>
                         <div class="form-group">
