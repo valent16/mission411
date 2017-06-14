@@ -18,6 +18,7 @@ class Rule
 
     public function __construct($ligne)
     {
+
         $array = explode(';',$ligne);
 
         $this->num = $array[0];

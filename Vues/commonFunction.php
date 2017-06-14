@@ -95,7 +95,7 @@ function loadJavaScript(){
     echo "<script type=\"text/javascript\" src=\"Assets/bootstrap/js/bootstrap.min.js\"></script>";
 }
 
-function input($type,$class,$id,$name,$value,$placeholder){
+function input($type,$class,$id,$name,$value,$pattern,$placeholder){
     $input = "<input ";
     $input .= "type='$type' ";
     $input .= "class='$class' ";
@@ -108,6 +108,10 @@ function input($type,$class,$id,$name,$value,$placeholder){
     if($value != null && strlen($value) > 0){
         $input .= "value='$value' ";
     }
+    if(strlen($pattern) > 0){
+        $input .= "pattern='$pattern' ";
+    }
+    $input .= "required=\"required\" ";
     if(strlen($placeholder) > 0){
         $input .= "placeholder='$placeholder' ";
     }

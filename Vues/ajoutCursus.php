@@ -45,20 +45,20 @@ if(isset($_GET['num_cursus'])){
                 <label class="control-label col-sm-3" for="num_etu">Numéro étudiant:</label>
                 <div class="col-sm-9">
                     <?php
-                        echo input("text","form-control","num_etu","num_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getNumCarteEtu()),"Entrer numéro étudiant");
+                        echo input("text","form-control","num_etu","num_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getNumCarteEtu()),"^[0-9]{6,6}$","Entrer numéro étudiant");
                     ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="nom_etu">Nom:</label>
                 <div class="col-sm-9">
-                    <?php echo input("text","form-control","nom_etu","nom_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getNom()),"Entrer nom étudiant"); ?>
+                    <?php echo input("text","form-control","nom_etu","nom_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getNom()),"^[a-zA-Z]{2,}$","Entrer nom étudiant"); ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="prenom_etu">Prenom:</label>
                 <div class="col-sm-9">
-                    <?php echo input("text","form-control","prenom_etu","prenom_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getPrenom()),"Entrer prénom étudiant"); ?>
+                    <?php echo input("text","form-control","prenom_etu","prenom_etu",($modelEtudiant==null ? "" : $modelEtudiant->getData()->getPrenom()),"^[a-zA-Z]{2,}$","Entrer prénom étudiant"); ?>
                 </div>
             </div>
             <div class="form-group">
@@ -82,7 +82,7 @@ if(isset($_GET['num_cursus'])){
             <div class="form-group">
                 <label class="control-label col-sm-3" for="nom_cursus">Nom Cursus:</label>
                 <div class="col-sm-9">
-                    <?php echo input("text","form-control","nom_cursus","nom_cursus",($cursus==null ? "" : $cursus->getNom()),"Entrer nom cursus"); ?>
+                    <?php echo input("text","form-control","nom_cursus","nom_cursus",($cursus==null ? "" : $cursus->getNom()),"^[a-zA-Z]{3,}$","Entrer nom cursus"); ?>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@ if(isset($_GET['num_cursus'])){
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="sigle">Sigle:</label>
                             <div class="col-sm-9">
-                                <?php echo input("text", "form-control", "sigle", "sigle[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getSigle()), "Entrer sigle"); ?>
+                                <?php echo input("text", "form-control", "sigle", "sigle[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getElementFormation()->getSigle()),"^[a-zA-Z0-9]{4,6}$", "Entrer sigle"); ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -138,13 +138,13 @@ if(isset($_GET['num_cursus'])){
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="sem_seq">Numéro de semestre:</label>
                             <div class="col-sm-9">
-                                <?php echo input("number", "form-control", "sem_seq", "sem_seq[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getSemSeq()), "Entrer numéro semestre"); ?>
+                                <?php echo input("number", "form-control", "sem_seq", "sem_seq[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getSemSeq()),"^[0-9]{1,2}$", "Entrer numéro semestre"); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3" for="credits">Nombre de crédits:</label>
                             <div class="col-sm-9">
-                                <?php echo input("number", "form-control", "credits", "credits[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getCredit()), "Entrer nombre crédits"); ?>
+                                <?php echo input("number", "form-control", "credits", "credits[]", ($cursus==null ? "" : $cursus->getElementsFormationEffectues()[$i]->getCredit()),"^[0-9]{1,2}$", "Entrer nombre crédits"); ?>
                             </div>
                         </div>
                         <div class="form-group">
