@@ -28,4 +28,17 @@ class ModelCursus extends model{
         $model->cursus = CursusGateway::putCursus($model->dataError, $cursus);
         return $model;
     }
+
+    public static function getModelDeleteCursus($idCursus){
+        $model = new self(array());
+
+        $modelElementsFormation = ModelCollectionElementFormation::getModelElementsFormationByIdCursus($idCursus);
+        $elementsFormationEffectue = $modelElementsFormation->getData();
+
+        foreach($elementsFormationEffectue as $e){
+            ModelElementFormationEffectue::getModelElementFormationDelete($e);
+        }
+
+        CursusGateway::deleteCursus($model->dataError, $idCursus);
+    }
 }

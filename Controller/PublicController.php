@@ -58,9 +58,30 @@ class PublicController{
                         require(Config::getViews()["detailCursus"]);
                     }else{
                         require(Config::getViews()["detailCursus"]);
-//                      echo "coucou";
-                        //require(Config::getVuesErreur()['suppressionActuEchec']);
                     }
+                    break;
+
+                case "dupliquerCursus":
+                    $id_cursus = $_GET['id_cursus'];
+                    if (isset($id_cursus)){
+                        $modelCursus = ModelCursus::getCursusById($id_cursus);
+                        $cursus = $modelCursus->getData();
+                        $cursus->setNom($cursus->getNom().' (copie)');
+                        $modelCollectionElement = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($cursus->getId());
+                        ModelCursus::getModelCursusPut($cursus);
+                        foreach ($modelCollectionElement->getData() as $e){
+                            $modelElementFormationEffectue = ModelElementFormationEffectue::getModelElementFormationPut($e, $cursus->getId());
+                        }
+                    }
+                    require(Config::getViews()["home"]);
+                    break;
+
+                case "suppressionCursus":
+                    $id_cursus = $_GET['id_cursus'];
+                    if (isset($id_cursus)){
+                        ModelCursus::getModelDeleteCursus($id_cursus);
+                    }
+                    require(Config::getViews()["home"]);
                     break;
 
                 default :

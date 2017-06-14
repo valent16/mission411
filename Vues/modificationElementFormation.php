@@ -56,14 +56,18 @@ if (isset($_GET["id"])) {
             <div class="form-group">
                 <label class="control-label col-sm-3" for="affectation">Affectation:</label>
                 <div class="col-sm-9">
+
                     <?php echo select("form-control", "affectation", "affectation", ["Tronc Commun" => "TC", "Tronc Commun de Branche" => "TCBR", "Filière" => "FCBR"], $elementFormationEffectue->getAffectation()); ?>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="sem_label">Libellé du semestre:</label>
                 <div class="col-sm-9">
-                    <?php echo select("form-control", "sem_label", "sem_label", ["TC" => "TC", "ISI" => "ISI", "SRT" => "SRT", "MTE" => "MTE"],$elementFormationEffectue->getSemLabel()); ?>
-                </div>
+                    <?php //echo select("form-control", "sem_label", "sem_label", ["TC" => "TC", "ISI" => "ISI", "SRT" => "SRT", "MTE" => "MTE"],$elementFormationEffectue->getSemLabel());
+                    ?>
+                    <?php echo input("text", "form-control", "sem_label", "sem_label", $elementFormationEffectue->getSemLabel(), "Entrer label semestre");?>
+
+                    </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3" for="sem_seq">Numéro de semestre:</label>

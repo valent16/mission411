@@ -21,6 +21,4 @@ class ModelCollectionElementFormationEffectue extends model{
         return $model;
     }
 
-
-
 }

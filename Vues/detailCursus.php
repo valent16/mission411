@@ -29,6 +29,8 @@ controlePublic();
 $modelCollectionElementFormation = ModelCollectionElementFormationEffectue::getModelElementsFormationByIdCursus($numCursus);
 $collectionElementFormation = $modelCollectionElementFormation->getData();
 $modelCursus = ModelCursus::getCursusById($numCursus);
+//print_r($modelCollectionElementFormation->getError());
+//print_r($modelCursus->getError());
 $cursus = $modelCursus->getData();
 $cursus->affectationElementsFormation($collectionElementFormation);
 $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
@@ -126,8 +128,9 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                     $listeElements = array();
 
                     foreach($elementsFormations as $k=>$elementsFormations){
+
                         echo '
-                    <a class="btn btn-primary btn-block margin-bottom-20 " id="Semestre-'.$k.'-'.$cycle.'" >Semestre '.$k.'</a>';
+                    <a class="btn btn-primary btn-block margin-bottom-20 btn-sem" id="Semestre-'.$k.'-'.$cycle.'" >Semestre '.$k.'</a>';
 
                         echo '<div class="text-left" id="div-Semestre-'.$k.'-'.$cycle.'">
                             <div class="panel panel-primary">
@@ -137,6 +140,7 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                         //Parcours des elements de formation effectués
                         foreach($elementsFormations as $e){
                             $listeElements[] = $e;
+                            echo $e->getElementFormation()->getSigle();
                             echo '<li class="list-group-item">
                                 <a data-toggle="modal" href="#'.$e->getSemLabel().''.$e->getElementFormation()->getSigle().'">'.$e->getElementFormation()->getSigle().'</a>
                                 <div class="pull-right action-buttons">
@@ -153,7 +157,7 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                     genererDetailElementFormation($listeElements);
                 }
 
-                //Permet de générer les page présentant le détail des cursus
+                //Permet de générer les pages présentant le détail des cursus
                 function genererDetailElementFormation($elementsFormations){
                     foreach($elementsFormations as $e) {
                         if ($e->getElementFormation()->getUtt()){
@@ -206,16 +210,24 @@ $modelEtudiant = ModelEtudiant::getEtudiantById($cursus->getNumEtu());
                     <button type="submit" class="btn btn-primary">Exporter en CSV</button>
                 </div>
             </form>
+
+            </br>
+            </br>
+            <?php
+            echo '<a type="button" class="btn btn-danger" href="index.php?action=suppressionCursus&id_cursus='.$numCursus.'">Supprimer Cursus</a>';
+            echo '<a type="button" class="btn btn-primary" href="index.php?action=dupliquerCursus&id_cursus='.$numCursus.'">Dupliquer Cursus</a>';
+            ?>
         </div>
     </div>
 </div>
 
     <script>
         $( document ).ready(function() {
-            $('#div-Semestre-1').hide();
-            $('div').filter(function() {
-                    return this.id.match(/Semestre.*/);
-                }).hide();
+//            $('#div-Semestre-1').hide();
+//            $('div').filter(function() {
+//                    return this.id.match(/Semestre.*/);
+//                }).hide();
+            $('a.btn-sem').addClass("active");
         });
 
 

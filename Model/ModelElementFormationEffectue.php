@@ -42,4 +42,10 @@ class ModelElementFormationEffectue extends Model{
         $model->element_formation_effectue = ElementFormationGateway::putElementFormationEffectue($model->dataError,$elementFormationEffectue,$id_cursus);
         return $model;
     }
+
+    public static function getModelElementFormationDelete($elementFormationEffectue){
+        $model = new self(array());
+        $model->element_formation_effectue = ElementFormationGateway::deleteElementFormation($model->dataError, $elementFormationEffectue->getIdentifiant());
+        return $model;
+    }
 }

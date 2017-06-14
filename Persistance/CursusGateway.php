@@ -78,4 +78,13 @@ class CursusGateway
         }
         return $cursus;
     }
+
+    public static function deleteCursus(&$dataError, $id_cursus){
+        $statement = DataBaseManager::getInstance()->prepareAndExecuteQuery('DELETE FROM cursus WHERE id_cursus=?',array($id_cursus));
+
+        if ($statement === false){
+            $dataError['persistance-delete'] = "Problème d'exécutioon de la requete";
+        }
+        DataBaseManager::destroyQueryResults($statement);
+    }
 }

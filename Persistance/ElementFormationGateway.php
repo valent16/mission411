@@ -17,7 +17,7 @@ class ElementFormationGateway{
             }
 
             if ($stmt !== false) {
-                $count = 0;
+//                $count = 0;
                 foreach ($stmt as $row) {
                     $elementFormation = new ElementFormation( $row['id_element_formation'], $row['sigle'], $row['utt'], $row['categorie']);
 
@@ -25,9 +25,9 @@ class ElementFormationGateway{
 
                     $collectionFormation[] = $elementFormationEffectue;
                 }
-                if ($count != 1) {
-                    $dataError['persistance-get'] = "Cursus Introuvable";
-                }
+//                if ($count != 1) {
+//                    $dataError['persistance-get'] = "Cursus Introuvable";
+//                }
             } else {
                 $dataError['persistance-get'] = "Cursus Introuvable";
             }
@@ -69,7 +69,7 @@ class ElementFormationGateway{
         $elementFormation = self::getElementFormationById($dataError, $id);
 
         if (empty($dataError)){
-            $statement = DataBaseManager::getInstance()->prepareAndExecuteQuery('DELETE FROM element_formation_effectue WHERE id=?',array($id));
+            $statement = DataBaseManager::getInstance()->prepareAndExecuteQuery('DELETE FROM element_formation WHERE id=?',array($elementFormation->getElementFormation()->getIdElementFormation()));
 
             if ($statement === false){
                 $dataError['persistance-delete'] = "Problème d'exécutioon de la requete";
